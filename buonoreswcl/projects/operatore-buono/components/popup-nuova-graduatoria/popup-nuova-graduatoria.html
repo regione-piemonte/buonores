@@ -1,0 +1,155 @@
+<!-- TITOLO -->
+<div class="modal-header">
+  <h4 id="titolo" style="color: black; font-family: Roboto;" class="modal-title">
+    {{tipo}} Graduatoria
+  </h4>
+</div>
+
+
+<!-- CAMPI RICERCA -->
+<div class="modal-body">
+  <form [formGroup]="nuovaGraduatoriaForm">
+
+    <!-- RIGA 1 -->
+    <div class="row pb-2">
+      <div class="col-md-6">
+        <label class="filterLabel"><b>Sportello</b></label>
+        <input formControlName="codSportello" id="codSportello" class="form-control campiricerca" type="text" readonly>
+      </div>
+    </div>
+
+    <!-- RIGA 2 -->
+    <div class="row pb-2">
+      <div class="col-md-6" [hidden]="tipo === 'Simula'">
+        <label class="filterLabel"><b>Descrizione</b></label>
+        <input formControlName="descrizione" id="descrizione" class="form-control campiricerca" type="text">
+        <div *ngIf="descrizione.invalid && (descrizione.dirty || descrizione.touched)" class="error">
+          <div *ngIf="descrizione.errors.required">
+            Il campo &egrave; obbligatorio
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+
+        <label class="filterLabel"><b>Importo aree non interne</b></label>
+        <div>
+        <input [formControl]="importoGenerale"  id="importoGenerale"
+           type="text" (blur)="formatta('importoGenerale')" class="form-control campiricerca"></div>
+        <div *ngIf="importoGenerale.invalid && (importoGenerale.dirty || importoGenerale.touched)" class="error">
+          <div *ngIf="importoGenerale.errors.required">
+            Il campo &egrave; obbligatorio
+          </div>
+          <div *ngIf="importoGenerale.errors.pattern">
+            Inserisci un numero a 2 cifre decimali
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGA 3 -->
+
+    <div class="row py-2">
+
+      <div class="col-md-6" *ngIf="aree && aree.length > 0">
+        <label class="filterLabel"><b>Importo interno area: {{aree[0]?.areaDesc}}</b></label>
+        <input formControlName="importoA1" id="importoA1" class="form-control campiricerca" type="text" (blur)="formatta('importoA1')">
+        <div *ngIf="importoA1.invalid && (importoA1.dirty || importoA1.touched)" class="error">
+          <div *ngIf="importoA1.errors.required">
+            Il campo &egrave; obbligatorio
+          </div>
+          <div *ngIf="importoA1.errors.pattern">
+            Inserisci un numero a 2 cifre decimali
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="aree && aree.length > 1">
+        <label class="filterLabel"><b>Importo interno area: {{aree[1]?.areaDesc}}</b></label>
+        <input formControlName="importoA2" id="importoA2" class="form-control campiricerca" type="text" (blur)="formatta('importoA2')">
+        <div *ngIf="importoA2.invalid && (importoA2.dirty || importoA2.touched)" class="error">
+          <div *ngIf="importoA2.errors.required">
+            Il campo &egrave; obbligatorio
+          </div>
+          <div *ngIf="importoA2.errors.pattern">
+            Inserisci un numero a 2 cifre decimali
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGA 4 -->
+    <div class="row py-2">
+      <div class="col-md-6">
+        <label class="filterLabel"><b>Importo mensile buono</b></label>
+        <input formControlName="importoMensile" id="importoMensile" class="form-control campiricerca" type="text" (blur)="formatta('importoMensile')">
+        <div *ngIf="importoMensile.invalid && (importoMensile.dirty || importoMensile.touched)" class="error">
+          <div *ngIf="importoMensile.errors.required">
+            Il campo &egrave; obbligatorio
+          </div>
+          <div *ngIf="importoMensile.errors.pattern">
+            Inserisci un numero a 2 cifre decimali
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="filterLabel"><b>N&deg; Mesi buono</b></label>
+        <input formControlName="numeroMesi" id="numeroMesi" class="form-control campiricerca" type="number" min="1" max="100">
+        <div *ngIf="numeroMesi.invalid && (numeroMesi.dirty || numeroMesi.touched)" class="error">
+          <div *ngIf="numeroMesi.errors.required">
+            Il campo &egrave; obbligatorio
+          </div>
+          <div *ngIf="numeroMesi.errors.pattern">
+            Inserisci un numero intero
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- CRITERI -->
+  <div class="row pt-4">
+    <div class="col-md-12">
+      <table mat-table [dataSource]="client.listaCriteriOrdinamento" class="mat-elevation-z8 col-md-12">
+
+        <!-- Criterio Ordinamento -->
+        <ng-container matColumnDef="ordinamentoCriterio">
+          <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3"> Criterio Ordinamento </th>
+          <td mat-cell *matCellDef="let element" class="valori-tabella pr-3"> {{element.ordinamentoCriterio}} </td>
+        </ng-container>
+
+        <!-- Direzione Ordinamento -->
+        <ng-container matColumnDef="ordinamentoDirezione">
+          <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3"> Direzione Ordinamento </th>
+          <td mat-cell *matCellDef="let element" class="valori-tabella pr-3"> {{element.ordinamentoDirezione}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsCriteri"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsCriteri;"></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto mr-auto">
+        <button id="btnClose" type="submit" class="btn btn-link" (click)="activeModal.dismiss('Cross click')">
+          ANNULLA
+        </button>
+      </div>
+      <div class="col-auto">
+        <button id="btnSave" [disabled]="nuovaGraduatoriaForm.invalid" type="submit" class="btn btn-primary"
+          (click)="conferma()">
+          <span *ngIf="tipo === 'Nuova'; else Simula">CREA {{tipo | uppercase}} GRADUATORIA</span>
+          <ng-template #Simula>{{tipo | uppercase}} GRADUATORIA</ng-template>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

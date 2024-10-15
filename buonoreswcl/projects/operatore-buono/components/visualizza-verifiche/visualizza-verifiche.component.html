@@ -1,0 +1,96 @@
+<div class="modal-header">
+  <h4 id="titolo" style="color: black; font-family: Roboto;" class="modal-title">
+    VERIFICHE
+  </h4>
+  <button style="outline: none;" type="button" class="close" aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="tableCronologia modal-body" style="overflow-x: auto; position: relative;">
+  <div *ngIf="!listaVerifiche" style="text-align: center;">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="listaVerifiche?.data?.length > 0">
+    <table mat-table matSort [dataSource]="listaVerifiche" class="table table-sm table-striped table-hover">
+      <ng-container matColumnDef="controllo">
+        <th class="columns_header" mat-header-cell *matHeaderCellDef>Controllo</th>
+        <td class="celleTab" mat-cell *matCellDef="let element">
+          <ng-template [ngIf]="isControllo('NESSUNA_INCOMPATIBILITA',element)">
+            Incompatibilita' con altre misure:&nbsp; {{element?.misure}}
+          </ng-template>
+          <ng-template [ngIf]="isControllo('INCOMPATIBILITA_PER_CONTRATTO',element)">
+            Incompatibilit&agrave; per contratto:&nbsp; {{element?.misure}}
+          </ng-template>
+          <ng-template [ngIf]="isControllo('ATECO',element)">
+            Ateco:&nbsp; {{element?.misure}}
+          </ng-template>
+          <ng-template [ngIf]="isControllo('ISEE_CITTADINO',element)">
+            Isee:&nbsp; {{element?.misure}}
+          </ng-template>
+          <ng-template [ngIf]="isControllo('ISEE',element)">
+            Isee:&nbsp; {{element?.misure}}
+          </ng-template>
+          <!-- <ng-template [ngIf]="isControllo('PUNTEGGIO_PSOCIALE',element)">
+							Verifica punteggio sociale:&nbsp; {{element?.misure}}
+						</ng-template> -->
+          <ng-template [ngIf]="isControllo('CONFORMITA_PSOCIALE',element)">
+            Presenza di altre misure non compatibili:&nbsp; {{element?.misure}}
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="fonte">
+        <th class="columns_header" mat-header-cell *matHeaderCellDef>Fonte</th>
+        <td class="celleTab" mat-cell *matCellDef="let element">{{element.fonte}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dataControllo">
+        <th class="columns_header" mat-header-cell *matHeaderCellDef>Informazione al</th>
+        <td class="celleTab" mat-cell *matCellDef="let element">
+          {{element.dataInizioValidita | date:'dd/MM/yyyy HH:mm'}}
+          <!-- <ng-template [ngIf]="isControllo('ateco',element)">
+						{{element.dataVerificaAteco | date:'dd/MM/yyyy HH:mm'}}
+					</ng-template>
+					<ng-template [ngIf]="isControllo('isee',element)">
+						{{element.dataVerificaIsee | date:'dd/MM/yyyy HH:mm'}}
+					</ng-template> -->
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="note">
+        <th class="columns_header" mat-header-cell *matHeaderCellDef>Note</th>
+        <td class="celleTab" mat-cell *matCellDef="let element">{{element.note}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataRichiesta">
+        <th class="columns_header" mat-header-cell *matHeaderCellDef>Data<br>richiesta</th>
+        <td class="celleTab" mat-cell *matCellDef="let element">{{this.dateToLocale(element.dataRichiesta) |
+          date:'dd/MM/yyyy HH:mm'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="noteRichiesta">
+        <th class="columns_header" mat-header-cell *matHeaderCellDef>Note<br>richiesta</th>
+        <td class="celleTab" mat-cell *matCellDef="let element">{{element.noteRichiesta}}</td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="esitoEnteGestore">
+				<th class="columns_header" mat-header-cell *matHeaderCellDef>Esito Ente Gestore</th>
+				<td class="celleTab" mat-cell *matCellDef="let element"></td>
+			</ng-container>
+			<ng-container matColumnDef="dateEoreEsito">
+				<th class="columns_header" mat-header-cell *matHeaderCellDef>Data e ora esito</th>
+				<td class="celleTab" mat-cell *matCellDef="let element"></td>
+			</ng-container>
+			<ng-container matColumnDef="note">
+				<th class="columns_header" mat-header-cell *matHeaderCellDef>Note</th>
+				<td class="celleTab" mat-cell *matCellDef="let element"></td>
+			</ng-container> -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div class="col-12 fontnormale">
+    <div class="col-12" *ngIf="listaVerifiche?.data?.length == 0" style="text-align: center;">
+      <label class="no-data-available">Non risultano verifiche collegate all'Ente Gestore</label>
+    </div>
+  </div>
+</div>

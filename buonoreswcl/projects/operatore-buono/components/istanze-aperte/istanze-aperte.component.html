@@ -1,0 +1,373 @@
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px;">
+
+  <div class="col-md-1"></div>
+
+  <div class="col" style="max-width: 3000px;">
+    <div class="row pt-2">
+      <div class="col-auto ml-auto">
+        <button type="button" class="btn-primary" title="Nuovo Sportello" *ngIf="checkAzione('OP-NuovoSportello')"
+          (click)="nuovoSportello()">
+          <div class="px-2 py-2">Nuovo Sportello</div>
+        </button>
+      </div>
+    </div>
+    <form [formGroup]="searchForm">
+      <div class="row buonoresFilter">
+
+        <!-- PRIMA RIGA -->
+        <div class="row col-md-12" style="padding-top:30px;">
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Sportello</b></label>
+            <ng-container>
+              <select formControlName="codSportello" id="codSportello"
+                class="form-control form-control-sm campiricerca riga-totale-azzurra">
+                <option value=""> </option>
+                <option *ngFor="let sportello of client.listaSportelliSalvato?.sportelli"
+                  [value]="sportello.codSportello">{{sportello.descSportello}}</option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Numero Domanda</b></label>
+            <input formControlName="numeroDomanda" id="numeroDomanda"
+              class="form-control campiricerca riga-totale-azzurra" type="text">
+          </div>
+          <div class="col-md-3 divCol3">
+          </div>
+        </div>
+
+        <!-- SECONDA RIGA -->
+        <div class="row col-md-12" style="padding-top:30px;padding-bottom:30px;">
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Stato Domanda</b></label>
+            <ng-container>
+              <select formControlName="statoDomanda" id="statoDomanda"
+                class="form-control form-control-sm statoCombo campiricerca">
+                <option value="" id="statoDomandaOption"> </option>
+                <option *ngFor="let stato of client.listaStatiSalvato" [value]="stato.codStato" id="statoDomandaOption">
+                  {{stato.descStato}}</option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Destinatario </b>
+              <div style="font-size: 11px; display: inline;">(Nome, Cognome o Codice fiscale)</div>
+            </label>
+            <input formControlName="destinatario" id="destinatario" class="form-control campiricerca" type="text">
+          </div>
+
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Richiedente </b>
+              <div style="font-size: 11px; display: inline;">(Nome, Cognome o Codice fiscale)</div>
+            </label>
+            <input formControlName="richiedente" maxlength="300" id="richiedente" class="form-control campiricerca"
+              type="text">
+          </div>
+        </div>
+
+        <!-- TERZA RIGA -->
+        <div class="row col-md-12" style="padding-bottom:30px;">
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Verifica ente effettuata</b></label>
+            <ng-container>
+              <select formControlName="formVerificaEnteEffettuata" id="idStatoVerificaEnteGestore"
+                class="form-control form-control-sm campiricerca">
+                <option value="" id="StatoVerificaEnteGestoreOption"> </option>
+                <option *ngFor="let statoVerifica of client.listaStatiVericaEnteGestore" [value]="statoVerifica"
+                  id="StatoVerificaEnteGestoreOption">{{statoVerifica}}
+                </option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Presenza di misure non compatibili</b></label>
+            <ng-container>
+              <select formControlName="formPresenzaDiMisureNonCompatibili" id="idEsitoVerificaEnteGestore"
+                class="form-control form-control-sm campiricerca">
+                <option value="" id="EsitoVerificaEnteGestoreOption"> </option>
+                <option *ngFor="let esitoVerifica of client.listaEsitiVericaEnteGestore" [value]="esitoVerifica"
+                  id="EsitoVerificaEnteGestoreOption">{{esitoVerifica}}
+                </option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div id="divEnteGestore" class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Ente Gestore</b></label>
+            <input (ngModelChange)="updateInput()" type="text" id="enteGestore" type="text"
+              class="form-control campiricerca" matInput [matAutocomplete]="auto" formControlName="formEnteGestore">
+            <mat-autocomplete #auto="matAutocomplete" id="idEnteGestore" panelWidth="auto">
+              <mat-option id="enteGestoreOption" value="" class="matautocomplete-option"> </mat-option>
+              <mat-option id="enteGestoreOption" *ngFor="let enteGestore of client.filteredEntiRegionali | async"
+                [value]="enteGestore">
+                {{enteGestore}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </div>
+
+        <!-- QUARTA RIGA -->
+        <div class="row col-md-12" style="padding-bottom:30px;">
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Stato verifica</b></label>
+            <ng-container>
+              <select formControlName="statoVerifica" id="idStatoVerifica"
+                class="form-control form-control-sm campiricerca">
+                <option value=""></option>
+                <option *ngFor="let statoVerifica of statiVerifiche" [value]="statoVerifica">
+                  <span>{{statoVerifica}}</span>
+                </option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Data verifica da</b></label>
+            <input formControlName="dataVerificaDa" id="dataVerificaDa" class="form-control campiricerca"
+              type="date">
+          </div>
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Data verifica a</b></label>
+            <input formControlName="dataVerificaA" id="dataVerificaA" class="form-control campiricerca"
+              type="date">
+          </div>
+        </div>
+                <!-- QUINTA RIGA -->
+        <div class="row col-md-12" style="padding-bottom:30px;">
+          <div class="col-md-3 divCol3">
+            <label class="filterLabel"><b>Decesso/Fuori Regione</b></label>
+            <ng-container>
+              <select formControlName="formDecessoResidenza" id="idDecessoResidenza"
+                class="form-control form-control-sm campiricerca">
+                <option value="" id="idDecessoResidenza"> </option>
+                <option *ngFor="let element of client.listaDecessoResidenza" [value]="element" id="idDecessoResidenza">
+                  {{element}}</option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div class="col-md-3 divCol3">
+          </div>
+
+          <div class="col-md-3 verticalCentered divCol3">
+            <button id="btnSearch" type="submit" class="btn btn-primary block bottonifunzione"
+              [disabled]="!searchForm.valid" (click)="avviaRicerca()">
+              Cerca
+            </button>
+            <button id="btnLoading" class="btn btn-primary block" type="button" disabled style="display: none;">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Loading...
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+
+<div class="row py-1 buonores" style="padding-top: 5px; padding-bottom: 5px;" *ngIf="ricercaEffettuata">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-5" style="margin-bottom: 10px;">
+
+    <span class="results" style="margin-bottom: 10px;">Risultati: {{ dataListaRichieste?.data.length }}</span>
+
+  </div>
+
+  <div class="col-md-6"></div>
+  <div class="col-md-1"></div>
+  <div class="col-md-5 align-self-end" style="margin-bottom: 15px;">
+    <button type="button" class="btn btn-link pl-0" (click)="annullaRicerca()" style="color: #006CB4;">
+      <span style="margin-bottom: 10px;"></span>
+      <b style="font-size: 14px;">Annulla Ricerca</b>
+    </button>
+  </div>
+  <div class="col-md-6"></div>
+</div>
+
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px; " [hidden]="!ricercaEffettuata">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-10" style="max-width: 3000px;">
+
+    <table mat-table matSort [dataSource]="dataListaRichieste" multiTemplateDataRows
+      class="mb-3 table table-hover table-responsive-xl tabellabuonores" (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="check">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef>
+          <input type="checkbox" (click)="checkUncheckAll()" [(ngModel)]="selezionaTutto" id="tutti">
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          <input type="checkbox" [(ngModel)]="element.checked" (ngModelChange)="checkSelezione()">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="numeroDomanda">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Numero Domanda </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element" matTooltip="{{ element.sportelloDesc }}"
+        matTooltipPosition="above" matTooltipClass="tooltipsportello">
+         {{element.numeroDomanda}} </td>
+      </ng-container>
+
+      <!--Destinatario-->
+      <ng-container matColumnDef="Destinatario">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+          <div>Destinatario</div>
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          {{element.nomeDestinatario}} {{element.cognomeDestinatario}}<br>
+          {{element.cfDestinatario}}
+        </td>
+      </ng-container>
+
+      <!--Richiedente-->
+      <ng-container matColumnDef="Richiedente">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+          <div>Richiedente</div>
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          {{element.nomeRichiedente}} {{element.cognomeRichiedente}}<br>
+          {{element.cfRichiedente}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="codStato">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Stato
+          Domanda </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          {{element.stato.descStato}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataDomanda1">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+          Data
+          <br>
+          Domanda
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element"> {{element.dataDomanda}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="decessoResidenza">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+          Decesso<br>Fuori Regione
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          <span *ngIf="element.dataDecesso !== null">{{element.dataDecesso}} (D)</span>
+          <span *ngIf="element.dataCambioResidenza !== null && element.dataDecesso === null">{{element.dataCambioResidenza}} (R)</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="enteGestore">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Ente
+          Gestore </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          {{element.enteGestore.denominazioneEnte}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="statoEsito">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef style="padding-right: 5px;"
+          matTooltip="{{messaggeVerifica}}" matTooltipPosition="above" matTooltipClass="tooltipVerifica">Verifica
+          <mat-icon style="color: #006CB4;" class="icon-small">info</mat-icon>
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element" style="padding-right: 5px;">
+          <span *ngIf="element.verifiche.verifica_eg_richiesta == true">Richiesta verifica <br></span>
+          <span *ngIf="element.verifiche.verifica_eg_in_corso == true">Verifica in corso <br></span>
+          <span *ngIf="element.verifiche.verifica_eg_conclusa == true">Verifica effettuata <br></span>
+          <span *ngIf="element.esitoVerificaBuono == true">Positivo</span>
+          <span *ngIf="element.esitoVerificaBuono == false">Negativo</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataVerifica">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Data
+          Verifica </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          {{ element.dataVerificaBuono }}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="esitoVerifica">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Esito
+          Verifica </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          <span *ngIf="element.esitoVerificaBuono == true">Positivo</span>
+          <span *ngIf="element.esitoVerificaBuono == false">Negativo</span>
+        </td>
+      </ng-container> -->
+
+      <!-- StatoEsitoDatVerifica 
+      <ng-container matColumnDef="statoEsitoDataVerifica">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef style="padding-right: 5px;"
+          matTooltip="{{messaggeVerifica}}" matTooltipPosition="above" matTooltipClass="tooltipVerifica">Verifica
+          <mat-icon style="color: #006CB4;" class="icon-small">info</mat-icon>
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element" style="padding-right: 5px;">
+          <span *ngIf="element.verifiche.verifica_eg_richiesta == true">Richiesta verifica <br></span>
+          <span *ngIf="element.verifiche.verifica_eg_in_corso == true">Verifica in corso <br></span>
+          <span *ngIf="element.verifiche.verifica_eg_conclusa == true">Verifica effettuata <br></span>
+          <span *ngIf="element.esitoVerificaBuono == true">Positivo</span>
+          <span *ngIf="element.esitoVerificaBuono == false">Negativo</span>
+          <br>
+          {{ element.dataVerificaBuono }}
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="azione">
+        <th class="etichette-tabella text-center" mat-header-cell *matHeaderCellDef>
+          <div class="text-center">Azioni </div>
+        </th>
+        <td class="pulsanti-azioni" mat-cell *matCellDef="let element">
+          <button type="button" (click)="routeTo('istanze-aperte', element, '/dati-istanza')" class="btn"
+            title="Dettaglio Domanda">
+            <span class="fas fa-file-alt" style="color: #006CB4;" data-toggle="tooltip"></span>
+          </button>
+          <button *ngIf="checkAzione('verifiche')" type="button" class="btn" data-toggle="tooltip" title="Verifiche"
+            (click)="openVerifiche(element)">
+            <span class="fas fa-server" style="color: #006CB4;"></span>
+          </button>
+          <button *ngIf="checkAzione('cronologia')" type="button" (click)="openCronologia(element)" class="btn"
+            data-toggle="tooltip" title="Cronologia">
+            <span class="fas fa-history" style="color: #006CB4;"></span>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="col-12" *ngIf="dataListaRichieste?.data?.length == 0" style="text-align: center;padding-top:30px;">
+      <label class="no-data-available">Nessuna scheda soddisfa i criteri di ricerca selezionati</label>
+    </div>
+
+    <mat-paginator class="paginator" [length]="dataListaRichieste?.data.length" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]=true style="padding-top:30px;">
+    </mat-paginator>
+  </div>
+
+  <div class="col-md-1"></div>
+
+</div>
+<div class="tab-row">
+  <div class="row justify-content-end">
+    <div class="col-6" style="padding: 0 !important;">
+    </div>
+    <div class="col-5 buttonContainer text-right" style="padding: 0 !important;">
+      <button *ngIf="checkAzione('OP-PrendiInCarico') && ricercaEffettuata" type="submit" class="btn btn-primary"
+        style="width: 220px; margin: 30px;" [disabled]="checkDisabled(null, 'PRESA-CARICO')"
+        (click)="presaInCarico(null)" data-toggle="tooltip"
+        [title]="checkDisabled(null, 'PRESA-CARICO')? 'E\' possibile effettuare la presa in carico solo per domande in stato RETTIFICATA o INVIATA ' : '' ">
+        Presa in carico
+      </button>
+    </div>
+    <div class="col-1" style="padding: 0 !important;"></div>
+  </div>
+</div>

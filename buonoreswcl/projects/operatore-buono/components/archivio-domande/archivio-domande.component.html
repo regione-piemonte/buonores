@@ -1,0 +1,174 @@
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px;">
+
+    <!-- Lascio spazio a sx-->
+    <div class="col-md-1"></div>
+
+    <div class="col" style="max-width: 3000px;">
+        <form [formGroup]="searchForm">
+        <div class="row stylePanelRicerca">
+            <!-- Prima riga del pannello con gli elementi-->
+            <div class="row col-md-12" style="padding-top:30px;">
+                <div class="col-md-3 styleInputForm">
+                    <label class="styleLabel"><b>Sportello</b></label>
+                    <ng-container>
+                        <select formControlName="codSportello" id="codSportello"
+                            class="form-control form-control-sm campiricerca riga-totale-azzurra">
+                            <option *ngFor="let sportello of client.listaSportelliSalvatoArchivio?.sportelli"
+                                [value]="sportello.codSportello">
+                                {{sportello.descSportello}}
+                            </option>
+                        </select>
+                    </ng-container>
+                </div>
+                <div class="col-md-3 styleInputForm">
+                    <label class="styleLabel"><b>Numero Domanda</b></label>
+                    <input formControlName="numeroDomanda" id="numeroDomanda"
+							class="form-control campiricerca riga-totale-azzurra" type="text">
+                </div>
+                <div class="col-md-3 styleInputForm"></div>
+            </div>
+            <!-- Seconda riga del pannello con gli elementi-->
+            <div class="row col-md-12" style="padding-top:30px;padding-bottom:30px;">
+
+                <div class="col-md-3 styleInputForm">
+                    <label class="styleLabel"><b>Stato Domanda</b></label>
+                    <ng-container>
+                        <select formControlName="statoDomanda" id="statoDomanda"
+                            class="form-control form-control-sm statoCombo campiricerca">
+                            <option value=""> </option>
+                            <option *ngFor="let stato of client.listaStatiSalvatoArchivio" [value]="stato.codStato">
+                                {{stato.descStato}}</option>
+                        </select>
+                    </ng-container>
+                </div>
+                <div class="col-md-3 styleInputForm">
+                    <label class="styleLabel"><b>Destinatario</b>
+                        <div class="styleSubLabel"> (Nome, Cognome o Codice fiscale)</div>
+                    </label>
+                    <input formControlName="destinatario" id="destinatario"
+							class="form-control campiricerca" type="text">
+                </div>
+                <div class="col-md-3 styleInputForm">
+                    <label class="styleLabel"><b>Richiedente</b>
+                        <div class="styleSubLabel"> (Nome, Cognome o Codice fiscale)</div>
+                    </label>
+                    <input formControlName="richiedente" id="richiedente"
+							class="form-control campiricerca" type="text">
+                </div>
+                <div class="col-md-3 verticalCentered styleInputForm">
+                    <button class="btn btn-primary styleButton bottonifunzione"
+                        [disabled]="!searchForm.valid"
+                        (click)="avviaRicerca()">
+                        Cerca
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    <!-- Lascio spazio a dx-->
+    <div class="col-md-1"></div>
+</div>
+
+<!-- Risultati + annulla_ricerca -->
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px;" *ngIf="ricercaEffettuata">
+	<div class="col-md-1"></div>
+
+	<div class="col-md-5" style="margin-bottom: 10px;">
+
+		<span class="results" style="margin-bottom: 10px;">Risultati: {{ dataSource?.data.length }}</span>
+
+	</div>
+
+	<div class="col-md-6"></div>
+	<div class="col-md-1"></div>
+	<div class="col-md-5 align-self-end" style="margin-bottom: 15px;">
+		<button type="button" class="btn btn-link pl-0" (click)="annullaRicerca()" style="color: #006CB4;">
+			<span style="margin-bottom: 10px;"></span>
+			<b style="font-size: 14px;">Annulla Ricerca</b>
+		</button>
+	</div>
+	<div class="col-md-6"></div>
+</div>
+
+<!-- TABLE PAGINATOR -->
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px; " [hidden]="!ricercaEffettuata">
+	<div class="col-md-1"></div>
+
+	<div class="col-md-10" style="max-width: 3000px;">
+
+		<table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows
+			class="mb-3 table table-hover table-responsive-xl tabellabuonores" (matSortChange)="sortData($event)">
+
+			<ng-container matColumnDef="numeroDomanda">
+				<th class="columnsHeaderArchivio thArchivio" mat-header-cell *matHeaderCellDef mat-sort-header
+					style="padding-right: 0px;">
+					Numero Domanda
+				</th>
+				<td class="smarttableArchivio tdArchivio" style="padding-right: 0px;" mat-cell *matCellDef="let element"> {{element.numeroDomanda}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="cfDestinatario">
+				<th class="columnsHeaderArchivio"mat-header-cell *matHeaderCellDef mat-sort-header>
+					<div class="thArchivio" style="padding-left: 80px;padding-right: 0px;">Destinatario</div>
+				</th>
+				<td class="smarttableArchivio text-wrap tdArchivio" style="padding-right: 0px;padding-left: 0px;" mat-cell *matCellDef="let element">
+						<div style="text-align: center;">{{element.nomeDestinatario}} {{element.cognomeDestinatario}}</div>
+						<div style="text-align: center;">{{element.cfDestinatario}}</div>
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="cfRichiedente">
+				<th class="columnsHeaderArchivio" mat-header-cell *matHeaderCellDef mat-sort-header>
+					<div class="thArchivio" style="padding-left: 80px;padding-right: 50px;">Richiedente</div>
+				</th>
+				<td class="smarttableArchivio text-wrap tdArchivio"
+					style="padding-left: 0px;padding-right: 50px;"
+					mat-cell *matCellDef="let element">
+						<div style="text-align: center;">{{element.nomeRichiedente}} {{element.cognomeRichiedente}}</div>
+						<div style="text-align: center;">{{element.cfRichiedente}}</div>
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="codStato">
+				<th class="columnsHeaderArchivio thArchivio" mat-header-cell *matHeaderCellDef mat-sort-header> Stato Domanda </th>
+				<td class="smarttableArchivio tdArchivio" mat-cell *matCellDef="let element"> {{element.stato.descStato}}
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="dataDomanda1">
+				<th class="columnsHeaderArchivio thArchivio" mat-header-cell *matHeaderCellDef mat-sort-header> Data Domanda </th>
+				<td class="smarttableArchivio tdArchivio" mat-cell *matCellDef="let element"> {{element.dataDomanda}}
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="azione">
+				<th class="columnsHeaderArchivio" mat-header-cell *matHeaderCellDef><div style="text-align: center;">Azioni </div></th>
+				<td class="smarttableArchivio tdArchivio text-center" mat-cell *matCellDef="let element">
+					<button type="button" (click)="routeTo('archivio-domande', element, '/dati-istanza')" class="btn" title="Dettaglio Domanda">
+						<span class="fas fa-file-alt" style="color: #006CB4;" data-toggle="tooltip"></span>
+					</button>
+					<button type="button" class="btn" data-toggle="tooltip" title="Verifiche" (click)="openVerifiche(element)">
+						<span class="fas fa-server" style="color: #006CB4;"></span>
+					</button>
+					<button type="button" (click)="openCronologia(element)" class="btn" data-toggle="tooltip"
+						title="Cronologia">
+						<span class="fas fa-history" style="color: #006CB4;"></span>
+					</button>
+				</td>
+			</ng-container>
+
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+
+		<div class="col-12" *ngIf="dataSource?.data?.length == 0" style="text-align: center;padding-top:30px;">
+			<label class="no-data-available">Nessuna scheda soddisfa i criteri di ricerca selezionati</label>
+		</div>
+
+		<mat-paginator class="paginator" [length]="dataSource?.data.length" [pageSize]="client.righePerPaginaArchivio"
+			[pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]=true style="padding-top:30px;" [pageIndex]="client.paginaSalvataArchivio">
+		</mat-paginator>
+	</div>
+</div>

@@ -1,0 +1,610 @@
+<!-- Home -->
+<div class="row buonores" style="padding-top: 30px">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2">
+    <button type="button" class="btn btn-link pl-0" (click)="backButton()">
+      <span class="fas fa-chevron-left"></span>
+      <span style="margin-bottom: 10px; margin-left: 10px;"></span>
+      Home
+    </button>
+  </div>
+
+  <div class="col-md-3"></div>
+
+</div>
+
+<!-- Numero buono -->
+<div class="row buonores" style="padding-top: 30px">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2">
+    <label class="text-nowrap titlePage">Domanda: {{this.numeroDomanda}}<br>Buono in stato {{this.statoBuono}}
+      <ng-container *ngIf="this.statoBuono == 'RINUNCIATO'"> dal {{dataRinuncia}} </ng-container>
+      <ng-container *ngIf="this.statoBuono == 'REVOCATO' || this.statoBuono == 'REVOCATO_PRESA_VISIONE' "> dal {{dataRevoca}}</ng-container>
+      <ng-container *ngIf="domanda?.dataDecesso"><br>(Decesso in data: {{domanda?.dataDecesso |
+        date: 'dd/MM/yyyy'}})</ng-container>
+      <ng-container *ngIf="domanda?.dataResidenzaExtraregione"><br>(Cambio residenza in data:
+        {{domanda?.dataResidenzaExtraregione |
+        date: 'dd/MM/yyyy'}})</ng-container>
+    </label>
+  </div>
+
+  <div class="col-md-9"></div>
+</div>
+
+<div class="row buonores">
+  <div class="col-md-1"></div>
+  <div class="col-md-7 buonoresFilter">
+    <form [formGroup]="cambiaDecorrenzaForm">
+      <!-- Intestazioni -->
+      <h4>Cambia Decorrenza</h4>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="nuovaDataDecorrenzaBuono">Data decorrenza buono:</label>
+        </div>
+        <div class="col-md-3">
+          <label for="dataFineBuono">Data fine buono:</label>
+        </div>
+      </div>
+
+      <!-- Datepicker -->
+      <div class="row">
+        <div class="col-md-3">
+          <ng-container *ngIf="buonoattivo">
+            <input type="month" (input)="calcolaDifferenzaMesi()" id="decorrenzaInizio"
+              formControlName="decorrenzaInizio" class="form-control campiricerca"
+              [min]="this.datePipe.transform(this.decorrenzaBuono.decorrenzaInizio, 'yyyy-MM')">
+          </ng-container>
+          <ng-container *ngIf="!buonoattivo">
+            <input disabled type="month" (input)="calcolaDifferenzaMesi()" id="decorrenzaInizio"
+              formControlName="decorrenzaInizio" class="form-control campiricerca"
+              [min]="this.datePipe.transform(this.decorrenzaBuono.decorrenzaInizio, 'yyyy-MM')">
+          </ng-container>
+        </div>
+        <div class="col-md-3">
+          <input type="month" id="decorrenzaFine" formControlName="decorrenzaFine" class="form-control campiricerca">
+        </div>
+        <div class="col-md-2" *ngIf="buonoattivo">
+          <button type="submit" (click)="salvaDecorrenza()"
+            [disabled]="dateUguali || ((decorrenzaInizio.dirty || decorrenzaInizio.touched)&&decorrenzaInizio.invalid)"
+            class="btn btn-primary">Salva</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!-- Filto periodo -->
+<div class="row buonores">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7 buonoresFilter">
+    <!-- Titolo -->
+    <h4>Mese di riferimento del documento</h4>
+
+    <form [formGroup]="periodoRendicontazioneForm">
+      <!-- Intestazioni -->
+      <div class="row pt-1">
+        <div class="col-md-3">
+          <label for="meseInizio">Mese di inizio:</label>
+        </div>
+        <div class="col-md-3">
+          <label for="meseFine">Mese di fine:</label>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <!-- Datepicker -->
+      <div class="row">
+        <div class="col-md-3">
+          <input type="month" id="meseInizio" (input)="validazioneDate()" formControlName="meseInizio"
+            class="form-control campiricerca">
+
+        </div>
+        <div class="col-md-3">
+          <input type="month" id="meseFine" (input)="validazioneDate()" formControlName="meseFine"
+            class="form-control campiricerca">
+        </div>
+        <div class="col-md-2">
+          <button type="submit"
+            [disabled]="controlloDataFine || ((meseInizio.dirty || meseInizio.touched)&&meseInizio.invalid) || ((meseFine.dirty || meseFine.touched)&& meseFine.invalid)"
+            (click)="filtraPerPeriodo()" class="btn btn-primary">Filtra</button>
+        </div>
+      </div>
+
+      <!-- Validazione -->
+      <div class="row pb-4">
+        <div class="col-md-3">
+          <ng-container *ngIf="meseInizio.dirty || meseInizio.touched">
+            <ng-container *ngIf="meseInizio.invalid">
+              <ng-container *ngIf="meseInizio.errors.required">
+                <div class="error">
+                  Il campo e' obbligatorio
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="col-md-3">
+          <ng-container *ngIf="meseFine.dirty || meseFine.touched">
+            <ng-container *ngIf="meseFine.invalid">
+              <ng-container *ngIf="meseFine.errors.required">
+                <div class="error">
+                  Il campo e' obbligatorio
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="controlloDataFine">
+              <ng-container *ngIf="meseInizio.dirty || meseInizio.touched">
+                <div class="error">
+                  La data di fine deve essere maggiore di quella d'inizio
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>
+
+<!-- Documenti di spesa -->
+<div class="row buonores">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7 buonoresFilter">
+    <!-- Titolo -->
+    <h4>Documenti di Spesa</h4>
+
+    <!-- Tabella -->
+    <table class="table tabellabuonores">
+      <!-- Intestazioni -->
+      <thead class="thead">
+        <tr class="row">
+          <th class="col etichette-tabella">Mesi di riferimento</th>
+          <th class="col etichette-tabella">Stato Rendicontazione</th>
+          <th class="col etichette-tabella">Data invio a<br>Finpiemonte</th>
+          <th class="col etichette-tabella">Struttura Residenziale</th>
+          <th class="col etichette-tabella">Tipo documento</th>
+          <th class="col etichette-tabella">Numero documento</th>
+        </tr>
+      </thead>
+
+      <!-- Documenti spesa -->
+
+      <tbody>
+        <ng-container *ngFor="let documentoSpesa of this.documentiSpesaFiltrati">
+          <tr class="row" style="border-top: 2px solid #EEEEEE;">
+            <td class="col valori-tabella"><a (click)="documentoSpesa.isExpanded = !documentoSpesa.isExpanded">
+                Dal {{documentoSpesa.periodoInizio | date: 'dd/MM/yyyy'}}
+                <span *ngIf="documentoSpesa.periodoFine !== null">al {{documentoSpesa.periodoFine |
+                  date:'dd/MM/yyyy'}}</span>
+              </a></td>
+            <td class="col valori-tabella">{{getStatoDichiarazione(documentoSpesa.idDocSpesa)}}</td>
+            <td class="col valori-tabella">{{getDataInvio(documentoSpesa.idDocSpesa) | date: 'dd/MM/yyyy'}}</td>
+            <td class="col valori-tabella">{{documentoSpesa.rsaNome}}</td>
+            <td class="col valori-tabella">{{replace_(documentoSpesa.doc_tipo)}}</td>
+            <td class="col valori-tabella">{{documentoSpesa.doc_numero}}</td>
+          </tr>
+
+          <!-- Documenti spesa dettaglio -->
+          <ng-container *ngIf="documentoSpesa.isExpanded">
+            <ng-container *ngIf="documentoSpesa.documentiSpesaDettaglio.length>0">
+              <!-- Intestazioni -->
+              <tr class="row">
+                <th class="col etichette-tabella"
+                  style="margin-top: 10px;margin-left: 16px;border-radius: 10px 0 0 10px;">Data</th>
+                <th class="col etichette-tabella" style="margin-top: 10px;">Importo</th>
+                <th class="col-6 etichette-tabella"
+                  style="margin-top: 10px;margin-right: 16px;border-radius: 0 10px 10px 0;">Allegati</th>
+              </tr>
+
+              <!-- Valori Dettaglio -->
+              <ng-container *ngFor="let documentoSpesaDettaglio of documentoSpesa.documentiSpesaDettaglio">
+                <tr class="row">
+                  <td class="col valori-tabella" style="margin-left: 16px;border-radius: 10px 0 0 10px;">
+                    {{documentoSpesaDettaglio.documentoSpesaDettaglioData | date: 'dd/MM/yyyy'}}</td>
+
+                  <td class="col valori-tabella">{{convertiNumeroInItaliano(documentoSpesaDettaglio.importo)}}&euro;
+                  </td>
+
+                  <!-- Allegati -->
+                  <td class="col-6 valori-tabella" style="margin-right: 16px;border-radius: 0 10px 10px 0;">
+                    <mat-list *ngIf="documentoSpesaDettaglio.allegati.length>0">
+                      <ng-container *ngFor="let allegato of documentoSpesaDettaglio.allegati">
+                        <mat-list-item><a href="{{scaricaRendicontazione(allegato.allegatoId)}}" target="_blank">
+                            <span class="fas fa-download"></span>
+                            &nbsp;&nbsp;&nbsp;{{replace_(allegato.allegatoTipoDesc)}}
+                          </a>
+                        </mat-list-item>
+                      </ng-container>
+                    </mat-list>
+                    <ng-container *ngIf="documentoSpesaDettaglio.allegati.length==0">
+                      Nessun allegato presente
+                    </ng-container>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <!-- Controllo nessun risultato -->
+    <ng-container *ngIf="documentiSpesaFiltrati">
+      <ng-container *ngIf="documentiSpesaFiltrati.length === 0">
+        <div class="col-12" style="text-align: center;">
+          <label class="no-data-available">Nessun documento di spesa presente nel periodo selezionato</label>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>
+
+<!-- Documenti di spesa INTEGRAZIONE -->
+<div class="row buonores">
+  <div class="col-md-1"></div>
+  <div class="col-md-7 buonoresFilter">
+    <!-- Titolo -->
+    <h4>Richieste di integrazione</h4>
+
+    <!-- Tabella -->
+    <table class="table tabellabuonores">
+      <!-- Intestazioni -->
+      <thead class="thead">
+        <tr class="row">
+          <th class="col etichette-tabella">Mesi di riferimento</th>
+          <th class="col etichette-tabella">Data richiesta</th>
+          <th class="col etichette-tabella">Stato richiesta</th>
+          <th class="col etichette-tabella">Note</th>
+        </tr>
+      </thead>
+
+      <!-- Documenti spesa -->
+      <tbody>
+        <ng-container *ngFor="let richiesta of this.listaSpesaIntegrazioni">
+          <tr class="row" style="border-top: 2px solid #EEEEEE;">
+            <td class="col valori-tabella">
+              <a (click)="richiesta.isExpanded = !richiesta.isExpanded" *ngIf="richiesta.allegati.length>0">
+                Dal {{richiesta.periodoInizio}}
+                <span *ngIf="richiesta.periodoFine !== null">al {{richiesta.periodoFine}}</span>
+              </a>
+              <div *ngIf="richiesta.allegati.length<=0">
+                Dal {{richiesta.periodoInizio}}
+                <span *ngIf="richiesta.periodoFine !== null">al {{richiesta.periodoFine}}</span>
+              </div>
+            </td>
+            <td class="col valori-tabella">{{richiesta.dicSpesaIntegrazioneData}}
+            </td>
+            <td class="col valori-tabella">{{richiesta.dicSpesaIntegrazioneCode}}</td>
+            <td class="col valori-tabella">{{richiesta.dicSpesaIntegrazioneNote}}</td>
+          </tr>
+
+          <!-- Documenti sui quali e' stata fatta la richiesta -->
+          <ng-container *ngIf="richiesta.isExpanded">
+            <ng-container *ngIf="richiesta.allegati.length>0">
+              <!-- Intestazioni -->
+              <tr class="row">
+                <th class="col etichette-tabella"
+                  style="margin-top: 10px;margin-left: 16px;border-radius: 10px 0 0 10px;">Tipo</th>
+                <th class="col etichette-tabella "
+                  style="margin-top: 10px;margin-right: 16px;border-radius: 0 10px 10px 0;">Nome</th>
+              </tr>
+
+              <!-- Valori Dettaglio -->
+              <ng-container *ngFor="let allegato of richiesta.allegati" style="margin-bottom: 10px;">
+                <tr class="row">
+                  <td class="col valori-tabella" style="margin-left: 16px;border-radius: 10px 0 0 10px;">
+                    {{allegato.allegatoTipo}}</td>
+                  <td class="col valori-tabella" style="margin-right: 16px;border-radius: 0 10px 10px 0;">
+                    <a href="{{scaricaAllegato(allegato.allegatoId)}}" target="_blank">
+                      <span class="fas fa-download"></span> &nbsp;&nbsp;&nbsp; {{allegato.allegatoFilename}}
+                    </a>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <!-- Controllo nessun risultato -->
+    <ng-container *ngIf="listaSpesaIntegrazioni">
+      <ng-container *ngIf="listaSpesaIntegrazioni.length === 0">
+        <div class="col-12" style="text-align: center;">
+          <label class="no-data-available">Nessun richiesta di integrazione presente nel periodo selezionato</label>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>
+
+
+<!-- Contratti -->
+<div class="row buonores">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7 buonoresFilter">
+    <!-- Titolo -->
+    <h4>Contratti</h4>
+
+    <!-- Tabella -->
+    <table class="table tabellabuonores">
+      <!-- Intestazioni -->
+      <thead class="thead">
+        <tr class="row">
+          <th class="col etichette-tabella">Mesi di riferimento</th>
+          <th class="col-6 etichette-tabella">Struttura Residenziale</th>
+          <th class="col etichette-tabella">Tipologia</th>
+        </tr>
+      </thead>
+
+      <!-- Valori Contratti -->
+      <tbody>
+        <ng-container *ngFor="let contrattoAllegato of this.contrattiAllegatiFiltrati">
+          <tr class="row" style="border-top: 2px solid #EEEEEE;">
+            <td class="col valori-tabella"><a (click)="contrattoAllegato.isExpanded = !contrattoAllegato.isExpanded">
+                Dal {{contrattoAllegato.contratto.data_inizio | date: 'dd/MM/yyyy'}}
+                {{ getDataFineContratto(contrattoAllegato.contratto)}}</a>
+            </td>
+            <td class="col-6 valori-tabella"><a (click)="contrattoAllegato.isExpanded = !contrattoAllegato.isExpanded">
+                {{contrattoAllegato.contratto.fornitore.nome}} - {{contrattoAllegato.contratto.fornitore.comune}} -
+                {{contrattoAllegato.contratto.fornitore.indirizzo}}</a></td>
+            <td class="col valori-tabella">{{replace_(contrattoAllegato.contratto.tipo_fornitore)}}
+            </td>
+          </tr>
+
+          <!-- Dettaglio contratti -->
+          <ng-container *ngIf="contrattoAllegato.isExpanded">
+            <!-- Intestazioni -->
+            <tr class="row">
+              <th class="col etichette-tabella"
+                style="margin-top: 10px;margin-left: 16px;border-radius: 10px 0 0 10px;">Struttura Partita Iva</th>
+              <ng-container *ngIf="!(contrattoAllegato.contratto.tipo === 'CONTRATTO RSA')">
+                <th class="col-6 etichette-tabella" style="margin-top: 10px">Struttura Denominazione</th>
+              </ng-container>
+              <th class="col etichette-tabella"
+                style="margin-top: 10px;margin-right: 16px;border-radius: 0 10px 10px 0;">Allegati</th>
+            </tr>
+
+            <!-- Valori dettaglio -->
+            <tr class="row align-items-center">
+              <td class="col valori-tabella" style="margin-left: 16px;border-radius: 10px 0 0 10px;">
+                {{contrattoAllegato.contratto.fornitore.piva}}
+              </td>
+
+              <ng-container>
+                <td class="col-6 valori-tabella">
+                  {{contrattoAllegato.contratto.fornitore.nome}}
+                </td>
+              </ng-container>
+
+              <!-- Allegati -->
+              <td class="col valori-tabella" style="margin-right: 16px;border-radius: 0 10px 10px 0;">
+                <ng-container *ngFor="let allegato of contrattoAllegato.allegati">
+                  <a href="{{scaricaAllegato(allegato.allegatoId)}}" target="_blank">
+                    <span class="fas fa-download"></span> &nbsp;&nbsp;&nbsp;{{replace_(allegato.allegatoTipo)}}
+                  </a>
+                  <br>
+                </ng-container>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <!-- Controllo nessun risultato -->
+    <ng-container *ngIf="this.contrattiAllegatiFiltrati">
+      <ng-container *ngIf="this.contrattiAllegatiFiltrati.length === 0">
+        <div class="col-12" style="text-align: center;">
+          <label class="no-data-available">Nessun contratto presente nel periodo selezionato</label>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>
+
+<div class="row buonores">
+  <div class="col-md-1"></div>
+  <div class="col-md-7 buonoresFilter">
+
+    <!-- Intestazioni -->
+    <h4>Attestazione I.S.E.E</h4>
+    <div style="font-size:10px;padding-bottom:10px">Il destinatario &egrave; in possesso di un attestato I.S.E.E. socio
+      - sanitario in corso di validit&agrave;
+      avente un valore inferiore a 50.000 euro (65.000 euro per i minori e disabili)</div>
+    <label style="font-size:12px;padding-bottom:10px;font-weight: bold;">Anno di riferimento : {{this.annocorrente}}
+    </label>
+    <br>
+    <label *ngIf="isee?.isee_conforme" style="font-size:12px;padding-bottom:10px;font-weight: bold;">Isee Conforme (indicazioni
+      del cittadino) in data {{isee?.validita_inizio}}
+    </label>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="esitoVerifica">Esito Verifica operatore:</label>
+      </div>
+      <div class="col-md-2">
+        <label for="valoreVerifica">Valore Verificato:</label>
+      </div>
+      <div class="col-md-3">
+        <label for="dataRilascio">Data Rilascio:</label>
+      </div>
+      <div class="col-md-3">
+        <label for="dataScadenza">Data Scadenza:</label>
+      </div>
+    </div>
+
+    <!-- Datepicker -->
+    <div class="row">
+      <div class="col-md-4">
+        <div *ngIf="buonoattivorinunciato">
+          <ng-container *ngFor="let option of this.client.listaIseeVerificaConforme">
+            <label style="font-size: 12px;">
+              <input type="radio" class="checkmark" id="option" name="options" [(ngModel)]=conformeOption
+                [value]="option.codEsito">
+              {{option.descEsito}}&nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+          </ng-container>
+        </div>
+        <div *ngIf="!buonoattivorinunciato">
+          <ng-container *ngFor="let option of this.client.listaIseeVerificaConforme">
+            <label style="font-size: 12px;">
+              <input disabled type="radio" class="checkmark" id="option" name="options" [(ngModel)]="conformeOption"
+                [value]="option.codEsito">
+              {{option.descEsito}}&nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+          </ng-container>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+        <ng-container *ngIf="buonoattivorinunciato">
+          <input id="iseeValore" class="form-control" [(ngModel)]="valoreisee" type="text"
+            (blur)="changeKey($event.target.value)" appTwoDigitDecimalNumber>
+        </ng-container>
+        <ng-container *ngIf="!buonoattivorinunciato">
+          <input disabled id="iseeValore" class="form-control" [(ngModel)]="valoreisee" type="text"
+            (blur)="changeKey($event.target.value)" appTwoDigitDecimalNumber>
+        </ng-container>
+      </div>
+      <div class="col-md-3">
+        <ng-container *ngIf="buonoattivorinunciato">
+          <input type="date" id="dataRilascio" [(ngModel)]="dataRilascio" class="form-control campiricerca">
+        </ng-container>
+        <ng-container *ngIf="!buonoattivorinunciato">
+          <input disabled type="date" id="dataRilascio" [(ngModel)]="dataRilascio" class="form-control campiricerca">
+        </ng-container>
+      </div>
+      <div class="col-md-3">
+        <ng-container *ngIf="buonoattivorinunciato">
+          <input type="date" id="dataScadenza" [(ngModel)]="datascadenzaIsee" class="form-control campiricerca">
+        </ng-container>
+        <ng-container *ngIf="!buonoattivorinunciato">
+          <input disabled type="date" id="dataScadenza" [(ngModel)]="datascadenzaIsee"
+            class="form-control campiricerca">
+        </ng-container>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <label for="esitoVerifica">Note:</label>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-9" *ngIf="buonoattivorinunciato">
+        <textarea rows="5" id="notaIsee" class="form-control" [(ngModel)]="note" placeholder="Inserisci qui la nota">
+           </textarea>
+      </div>
+      <div class="col-md-9" *ngIf="!buonoattivorinunciato">
+        <textarea disabled rows="5" id="notaIsee" [(ngModel)]="note" class="form-control"
+          placeholder="Inserisci qui la nota">
+           </textarea>
+      </div>
+      <div class="col-md-3" *ngIf="buonoattivorinunciato">
+        <button type="submit" (click)="salvaNonConforme()" [disabled]="!((this.conformeOption==='CONFORME' && dataRilascio!==null && valoreisee!==null)
+           || (this.conformeOption!=='CONFORME' && this.note!==null))" class="btn btn-primary">Salva</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<div class="row buonores" style="padding-top:15px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-7 buonoresFilter">
+    <div class="row"
+      style="background: white; padding-top: 20px; padding-bottom: 20px; box-shadow: 1px 2px 8px #C4C4C4;">
+      <div class="col-md-12">
+        <div class="cronologia" style="padding-bottom:10px;">Elenco conformita' Isee &nbsp; &nbsp;<img
+            [@rotatedState]='state' src="assets/img/user/frecciagiu.png" (click)="apriIsee()" style="cursor: pointer;">
+        </div>
+        <div *ngIf="listaIsee?.data.length > 0">
+          <table mat-table matSort [dataSource]="listaIsee" class="table table-sm table-striped table-hover"
+            *ngIf="espansa">
+            <ng-container matColumnDef="iseeAnno">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Anno</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_anno}} </td>
+            </ng-container>
+            <ng-container matColumnDef="conforme">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Trasmissione Isee</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_conforme===true ? 'Conforme'
+                : 'Non verificato'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="validatoConforme">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Verifica Isee</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_verifica_esito_cod}} </td>
+            </ng-container>
+            <ng-container matColumnDef="iseeValore">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Valore</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_valore}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nota">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef style="white-space: nowrap;">Nota</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_note}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dataScadenza">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Data Scadenza</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_scadenza |
+                date:'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dataRilascio">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Data Rilascio</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_data_rilascio |
+                date:'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="verificatoIndata">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Verificato il</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_verificato_in_data |
+                date:'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="operatore">
+              <th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Verificato da</th>
+              <td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.isee_verifica_esito_cod!==null ?
+                element.utente_modifica : ''}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <div class="col-12 fontnormale">
+          <div class="col-12" *ngIf="listaIsee?.data.length == 0" style="text-align: center;">
+            <label class="no-data-available">Non e' stata inserita alcuna conformita' isee sul buono</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<!-- Pulsanti fine pagina -->
+<div class="row buonores" style="padding-bottom:140px; padding-top: 30px;">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <button type="button" class="btn btn-link pl-0" (click)="backButton()">
+      INDIETRO
+    </button>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>

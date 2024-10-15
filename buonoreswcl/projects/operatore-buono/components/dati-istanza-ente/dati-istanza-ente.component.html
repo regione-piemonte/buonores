@@ -1,0 +1,860 @@
+<br>
+<div class="row buonores" style="padding-top: 30px">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2">
+    <button type="button" class="btn btn-link pl-0" (click)="backButton()">
+      <span class="fas fa-chevron-left"></span>
+      <span style="margin-bottom: 10px; margin-left: 10px;"></span>
+      Home
+    </button>
+  </div>
+
+  <div class="col-md-3"></div>
+
+</div>
+<div *ngIf="showFeedback" class="row buonores" style="padding-top: 30px">
+  <div class="col-1"></div>
+  <div class="col-5" style="background-color: rgba(26, 155, 115, .1) 0% 0% no-repeat padding-box;"><app-feedback
+      *ngIf="showFeedback" [tipoFeedback]="tipoFeedback" [messaggio]="messaggioFeedback"
+      (close)="onCloseFeedback()"></app-feedback></div>
+  <div class="col-6"></div>
+</div>
+<div class="row buonores" style="padding-top: 30px">
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2">
+    <label class="text-nowrap titlePage">Dettaglio N. Domanda {{domanda?.numero}} del {{domanda?.data_aggiornamento |
+      date: 'dd/MM/yyyy' }} in stato {{domanda?.domanda_stato_desc}}<ng-container
+      *ngIf="domanda?.dataDecesso"><br>(Decesso in data: {{domanda?.dataDecesso |
+      date: 'dd/MM/yyyy'}})</ng-container>
+    <ng-container *ngIf="domanda?.dataResidenzaExtraregione"><br>(Cambio residenza in data:
+      {{domanda?.dataResidenzaExtraregione |
+      date: 'dd/MM/yyyy'}})</ng-container></label>
+  </div>
+  <div class="col-md-9"></div>
+
+</div>
+
+<!-- Tipo di contributo -->
+<div class="row buonores section-contributo">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <div class="row buonoresFilter">
+
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <label class="titleLabelSection">Tipo di contributo richiesto</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px;">
+        <label class="inputLabel">{{domanda?.contributo_tipo_desc}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!-- DENOMINAZIONE ENTE GESTORE-->
+<div class="row buonores section-denominazione">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <div class="row buonoresFilter">
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;">
+        <label class="titleLabelSection">Destinatario buono</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;">
+        <label class="titleSection">Dati destinatario</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Cognome</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.cognome}}</label>
+        </div>
+
+        <div class="col-md-4">
+          <label class="inputLabel">Nome</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.nome}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Codice fiscale</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.cf}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Data di nascita</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.data_nascita | date: 'dd/MM/yyyy'}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Nato a</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.comune_nascita}}
+            ({{domanda?.destinatario.provincia_nascita}})</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Stato</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.stato_nascita}}</label>
+        </div>
+      </div>
+
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Residente a</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.comune_residenza}}
+            ({{domanda?.destinatario.provincia_residenza}})</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Indirizzo</label><br>
+          <label class="inputLabelBold">{{domanda?.destinatario.indirizzo_residenza}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Asl</label><br>
+          <label class="inputLabelBold">{{domanda?.asl_destinatario_desc}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Domiciliato a</label><br>
+          <label class="inputLabelBold">{{domanda?.domicilio_destinatario.comune}}
+            ({{domanda?.domicilio_destinatario.provincia}})</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Indirizzo</label><br>
+          <label class="inputLabelBold">{{domanda?.domicilio_destinatario.indirizzo}}</label>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;"
+        *ngIf="domanda?.richiedente.cf===domanda?.destinatario.cf">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Email</label><br>
+          <label class="inputLabelBold">{{domanda?.contatto.email}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">N&deg; telefono</label><br>
+          <label class="inputLabelBold">{{domanda?.contatto.sms}}</label>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-8" style="padding-left: 0px">
+          <label class="inputLabel">Titolo di studio</label><br>
+          <label class="inputLabelBold">{{domanda?.studio_destinatario_desc}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Situazione lavorativa</label><br>
+          <label class="inputLabelBold">{{domanda?.lavoro_destinatario}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;"
+        *ngIf="domanda?.richiedente.cf!==domanda?.destinatario.cf">
+        <label class="titleSection">Dati richiedente</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;"
+        *ngIf="domanda?.richiedente.cf!==domanda?.destinatario.cf">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Cognome</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.cognome}}</label>
+        </div>
+
+        <div class="col-md-4">
+          <label class="inputLabel">Nome</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.nome}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Codice fiscale</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.cf}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;"
+        *ngIf="domanda?.richiedente.cf!==domanda?.destinatario.cf">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Data di nascita</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.data_nascita | date: 'dd/MM/yyyy'}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">Nato a</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.comune_nascita}}
+            ({{domanda?.richiedente.provincia_nascita}})</label>
+        </div>
+
+        <div class="col-md-4">
+          <label class="inputLabel">Stato</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.stato_nascita}}</label>
+        </div>
+      </div>
+
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;"
+        *ngIf="domanda?.richiedente.cf!==domanda?.destinatario.cf">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Residente a</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.comune_residenza}}
+            ({{domanda?.richiedente.provincia_residenza}})</label>
+        </div>
+        <div class="col-md-6">
+          <label class="inputLabel">Indirizzo</label><br>
+          <label class="inputLabelBold">{{domanda?.richiedente.indirizzo_residenza}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;"
+        *ngIf="domanda?.richiedente.cf!==domanda?.destinatario.cf">
+        <div class="col-md-4" style="padding-left: 0px">
+          <label class="inputLabel">Email</label><br>
+          <label class="inputLabelBold">{{domanda?.contatto.email}}</label>
+        </div>
+        <div class="col-md-4">
+          <label class="inputLabel">N&deg; telefono</label><br>
+          <label class="inputLabelBold">{{domanda?.contatto.sms}}</label>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px; padding-bottom:20px;"
+        *ngIf="domanda?.richiedente.cf!==domanda?.destinatario.cf">
+        <div class="col-md-12" style="padding-left: 0px">
+          <label class="inputLabel">Il richiedente opera in qualita' di</label><br>
+          <label class="inputLabelBold">{{domanda?.delega_desc}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12 inputLabel" style="left: 13px; padding-top:20px;padding-bottom:20px;"
+        *ngIf="this.delega!==null">
+        Copia delega
+      </div>
+      <div class="row col-md-12" style="left: 13px;" *ngIf="checkAzione('scarica_allegato') && this.delega!==null">
+        <a href={{this.urlDelega}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+          target="_blank">{{this.delega}}</a>
+      </div>
+      <div class="row col-md-12 inputLabel" style="left: 13px; padding-top:20px;padding-bottom:20px;"
+        *ngIf="this.cartaidentita!==null">
+        Copia carta d'identit&agrave;
+      </div>
+      <div class="row col-md-12" style="left: 13px;"
+        *ngIf="checkAzione('scarica_allegato') && this.cartaidentita!==null">
+        <a href={{this.urlCartaIdentita}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+          target="_blank">{{this.cartaidentita}}</a>
+      </div>
+      <div class="row col-md-12 inputLabel" style="left: 13px; padding-top:20px;padding-bottom:20px;"
+        *ngIf="this.procuraspeciale!==null">
+        Copia procura speciale
+      </div>
+      <div class="row col-md-12" style="left: 13px;"
+        *ngIf="checkAzione('scarica_allegato') && this.procuraspeciale!==null">
+        <a href={{this.urlProcuraSpeciale}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+          target="_blank">{{this.procuraspeciale}}</a>
+      </div>
+      <div class="row col-md-12 inputLabel" style="left: 13px; padding-top:20px;padding-bottom:20px;"
+        *ngIf="this.tutela!==null">
+        Copia tutela
+      </div>
+      <div class="row col-md-12" style="left: 13px;" *ngIf="checkAzione('scarica_allegato') && this.tutela!==null">
+        <a href={{this.urlTutela}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+          target="_blank">{{this.tutela}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+
+</div>
+<!-- ISEE -->
+<div class="row buonores section-isee" style="padding-bottom: 0px">
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <div class="row buonoresFilter" style="padding-bottom: 20px;">
+
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;">
+        <label class="titleLabelSection">Modulo</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;">
+        <label class="titleSection">Attestazione I.S.E.E</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top:20px;padding-bottom:20px;">
+        <div class="col-md-10 inputLabel" style="padding-left: 0px">
+          Il destinatario &egrave; in possesso di un attestato I.S.E.E. socio - sanitario in corso di validit&agrave;
+          avente un valore inferiore a 50.000 euro (65.000 euro per i minori e disabili)
+        </div>
+      </div>
+      <div class="row col-md-12 " style="left: 13px; padding-top:20px;">
+        <div class="row col-md-11 table_head" style="padding-top:20px;padding-right: 20px;">
+          <div class="col-md-4">
+            Esito verifica
+          </div>
+          <div class="col-md-3">
+            Valore verificato
+          </div>
+          <div class="col-md-2">
+            Data rilascio
+          </div>
+          <div class="col-md-3">
+            Data scadenza
+          </div>
+        </div>
+      </div>
+      <div class="row col-md-12 " style="left: 13px; padding-top:20px;">
+        <div class="row col-md-11 verifica" style="padding-top:20px;padding-bottom:40px;">
+          <div class="col-md-4 inputLabel" style="padding-top:10px;">
+            <div class="custom-control" style="padding-left: 0px;">
+              <input disabled type="radio" class="checkmark" [checked]="domanda?.isee.isee_verificato_conforme===true">
+              <label class="inputLabel" style="padding-left:10px;">Conforme</label>&nbsp;&nbsp;
+              <input disabled type="radio" class="checkmark" [checked]="domanda?.isee.isee_verificato_conforme===false">
+              <label class="inputLabel" style="padding-left:10px;">Non Conforme</label>
+            </div>
+          </div>
+          <div class="col-md-3 inputLabel" style="padding-top:5px;">
+            <input disabled class="form-control" [(ngModel)]="valoreisee" type="text" appTwoDigitDecimalNumber>
+          </div>
+          <div class="col-md-2 inputLabel">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerDataRilascio" userInputFormat="DD/MM/YYYY"
+                [(ngModel)]="domanda?.isee.isee_data_rilascio" disabled>
+              <mat-datepicker-toggle matSuffix [for]="pickerDataRilascio">
+              </mat-datepicker-toggle>
+              <mat-datepicker #pickerDataRilascio></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 inputLabel">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerDataScadenza" userInputFormat="DD/MM/YYYY"
+                [(ngModel)]="domanda?.isee.isee_scadenza" disabled>
+              <mat-datepicker-toggle matSuffix [for]="pickerDataScadenza">
+              </mat-datepicker-toggle>
+              <mat-datepicker #pickerDataScadenza></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;">
+        <label class="titleSection">Punteggio bisogno sociale</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top:20px;padding-bottom:20px;">
+        <div class="col-md-10 inputLabel" style="padding-left: 0px">
+          Il destinatario &egrave; gi&agrave; stato sottoposto a &ldquo;valutazione multidimensionale&rdquo; presso le
+          Unit&agrave; di Valutazione competenti (U.V.G. - ANIZIANI, o U.M.V.D. - DISABILI), e di essere in possesso di
+          un punteggio sociale pari a:
+        </div>
+      </div>
+      <div class="row col-md-12" style="padding-top:20px; padding-bottom:20px;">
+        <div class="col-md-12">
+          {{domanda?.punteggio_bisogno_sociale}}
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top:20px;padding-bottom:20px;">
+        <div class="col-md-12 inputLabel" style="padding-left: 0px">
+          Copia verbale o lettera di comunicazione
+        </div>
+      </div>
+      <div class="row col-md-12" *ngIf="checkAzione('scarica_allegato')" style="left: 13px;">
+        <a href={{this.urlVerbale}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+          target="_blank">{{this.verbale}}</a>
+      </div>
+
+
+      <div class="row col-md-12" style="left: 13px; padding-top: 20px;">
+        <label class="titleSection">Requisiti di compatibilit&agrave;</label>
+      </div>
+      <div class="row col-md-12 inputLabel" style="left: 13px; padding-top: 20px;"
+        *ngIf="domanda?.valutazione_multidimensionale==='UMVD'">
+        Il destinatario &egrave; persona con disabilit&agrave;, non autosufficiente
+      </div>
+      <div class="row col-md-12 inputLabel" style="left: 13px; padding-top: 20px;"
+        *ngIf="domanda?.valutazione_multidimensionale==='UVG'">
+        Il destinatario &egrave; persona di et&agrave; pari o superiore a 65 anni, non autosufficiente.
+      </div>
+      <div class="row col-md-10 inputLabel" style="left: 13px; padding-top: 40px;"
+        *ngIf="domanda?.nessuna_incompatibilita">
+        Il destinatario non &egrave; beneficiario di altre misure aventi natura di trasferimento monetario
+        specificatamente destinato al sostegno della redidenzialit&agrave;.
+      </div>
+      <div class="row col-md-10 inputLabel" style="left: 13px; padding-top: 40px;"
+        *ngIf="!domanda?.nessuna_incompatibilita">
+        Il destinatario &egrave; beneficiario di altre misure aventi natura di trasferimento monetario specificatamente
+        destinato/a al sostegno della redidenzialit&agrave; ed &egrave; disponibile a rinunciarvi in caso di assegnazione
+        del buono.
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top: 60px;">
+        <label class="titleSection">Dati contrattuali</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top:20px;">
+        <div class="col-md-10 inputLabel" style="padding-left: 0px"
+          *ngIf="domanda?.contratto.tipo==='NESSUN_CONTRATTO'">
+          Il destinatario non &egrave; in possesso di un contratto di ospitalit&agrave; con una Residenza Sanitaria Assistenziale,
+          ma si impegna a sottoscriverne uno entro 30 giorni dalla data in cui avrà ricevuto comunicazione di assegnazione condizionata del Buono
+        </div>
+        <div class="col-md-10 inputLabel" style="padding-left: 0px;" *ngIf="domanda?.contratto.tipo==='CONTRATTO_RSA'">
+          Il destinatario &egrave; in possesso di un contratto di ospitalit&agrave; con una Residenza Sanitaria Assistenziale.
+        </div>
+      </div>
+      <div class="row col-md-12" style="left: 13px; padding-top:20px;"
+        *ngIf="domanda?.contratto.tipo!=='NESSUN_CONTRATTO'">
+        <div class="row col-md-12" style="padding-top: 40px;padding-left: 0px;">
+          <label class="titleSection">Data inizio del contratto</label>
+        </div>
+        <div class="row col-md-12" style="padding-top:20px;padding-left: 0px;">
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Data inizio</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.data_inizio | date: 'dd/MM/yyyy'}}</label>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
+        </div>
+        <div class="row col-md-12" *ngIf="domanda?.contratto.tipo=='CONTRATTO_RSA'"
+          style="padding-top: 20px;padding-left: 0px;">
+          <div class="col-md-12" style="padding-top: 40px;padding-left: 0px;">
+            <label class="titleSection">Dati RSA</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Denominazione</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.nome}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Indirizzo</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.indirizzo}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Comune</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.comune}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Provincia</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.provincia}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">PIVA</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.piva}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            &nbsp;
+          </div>
+          <div class=" col-md-12" style="padding-top: 40px;padding-left: 0px;">
+            <label class="titleSection">Dati Sede legale RSA</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Denominazione</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.sede_legale.nome}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Indirizzo</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.sede_legale.indirizzo}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Comune</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.sede_legale.comune}}</label>
+          </div>
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Provincia</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.struttura.sede_legale.provincia}}</label>
+          </div>
+        </div>
+        <!-- <div class="row col-md-12" *ngIf="domanda?.contratto.tipo!=='COOPERATIVA'"
+          style="padding-top: 20px;padding-left: 0px;">
+          <label class="titleSection">Dati assistente familiare</label>
+        </div> -->
+        <!-- <div class="row col-md-12" style="padding-top:20px;padding-left: 0px;"
+          *ngIf="domanda?.contratto.tipo!=='COOPERATIVA'">
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Cognome</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.assistente_familiare.cognome}}</label>
+          </div>
+          <div class="col-md-4">
+            <label class="inputLabel">Nome</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.assistente_familiare.nome}}</label>
+          </div>
+          <div class="col-md-4">
+            <label class="inputLabel">Codice fiscale</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.assistente_familiare.cf}}</label>
+          </div>
+        </div> -->
+        <!-- <div class="row col-md-12" style="padding-top:20px;padding-left: 0px;"
+          *ngIf="domanda?.contratto.tipo!=='COOPERATIVA'">
+          <div class="col-md-4" style="padding-left: 0px">
+            <label class="inputLabel">Data di nascita</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.assistente_familiare.data_nascita | date:
+              'dd/MM/yyyy'}}</label>
+          </div>
+          <div class="col-md-4">
+            <label class="inputLabel">Nato a</label><br>
+            <label class="inputLabelBold"
+              *ngIf="domanda?.contratto.assistente_familiare.comune_nascita!=null">{{domanda?.contratto.assistente_familiare.comune_nascita}}
+              ({{domanda?.contratto.assistente_familiare.provincia_nascita}})</label>
+          </div>
+
+          <div class="col-md-4">
+            <label class="inputLabel">Stato</label><br>
+            <label class="inputLabelBold">{{domanda?.contratto.assistente_familiare.stato_nascita}}</label>
+          </div>
+        </div> -->
+        <!-- <div class="row col-md-12" style="padding-top: 20px;padding-left: 0px;"
+          *ngIf="domanda?.contratto.tipo==='COOPERATIVA' || domanda?.contratto.tipo==='PARTITA_IVA'">
+          <label class="titleSection">Dati cooperativa/agenzia/altro soggetto giuridico</label>
+        </div> -->
+        <!-- <div class="row col-md-12 inputLabel" style="padding-left: 0px" *ngIf="domanda?.contratto.tipo==='PARTITA_IVA'">
+          {{domanda?.contratto.piva_assitente_familiare}}
+        </div> -->
+        <!-- <div class="row col-md-12 inputLabel" style="padding-left: 0px" *ngIf="domanda?.contratto.tipo==='COOPERATIVA'">
+          {{domanda?.contratto.agenzia.cf}}
+        </div> -->
+        <div class="row col-md-12 inputLabelBold" style="padding-left: 0px;padding-top:20px;padding-bottom:20px;"
+          *ngIf="this.contratto!==null">
+          Copia contratto di lavoro
+        </div>
+        <div class="row col-md-12" style="padding-left: 0px;padding-top:20px;"
+          *ngIf="checkAzione('scarica_allegato') && this.contratto!==null">
+          <a href={{this.urlContratto}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+            target="_blank">{{this.contratto}}</a>
+        </div>
+        <div class="row col-md-12 inputLabelBold" style="padding-left: 0px;padding-top:20px;padding-bottom:20px;"
+          *ngIf="this.letteraincarico!==null">
+          Copia lettera d'incarico di assistenza domiciliare
+        </div>
+        <div class="row col-md-12" style="padding-left: 0px;padding-top:20px;"
+          *ngIf="checkAzione('scarica_allegato') && this.letteraincarico!==null">
+          <a href={{this.urlLetteraIncarico}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+            target="_blank">{{this.letteraincarico}}</a>
+        </div>
+
+      </div>
+      <!-- <div class="row col-md-12" style="left: 13px; padding-top:20px;"
+        *ngIf="domanda?.contratto.tipo==='COOPERATIVA' || domanda?.contratto.tipo==='PARTITA_IVA'">
+        <div class="row col-md-11 table_head" style="padding-top:20px;padding-bottom:20px;">
+          <div class="col-md-2">
+            Data verifica
+          </div>
+          <div class="col-md-3">
+            Codice Ateco
+          </div>
+          <div class="col-md-4">
+            Descrizione Ateco
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="row col-md-12 " style="left: 13px; padding-top:20px;"
+        *ngIf="domanda?.contratto.tipo==='COOPERATIVA' || domanda?.contratto.tipo==='PARTITA_IVA'">
+        <div class="row col-md-11 verifica" style="padding-top:20px;padding-bottom:20px;">
+          <div class="col-md-2 inputLabel">
+            {{domanda?.ateco.ateco_verificato_in_data | date: 'dd/MM/yyyy'}}
+          </div>
+          <div class="col-md-3 inputLabel">
+            {{domanda?.ateco.ateco_cod}}
+          </div>
+          <div class="col-md-7 inputLabel">
+            {{domanda?.ateco.ateco_desc}}
+          </div>
+        </div>
+      </div> -->
+      <div class="row col-md-12" style="padding-bottom:20px;">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!-- Nota interna presa in carico -->
+<div class="row buonores" *ngIf="domanda?.nota_interna!==null && domanda?.nota_interna!==''"
+  style="padding-bottom: 0px">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <div class="row buonoresFilter">
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-11" style="padding-left: 0px">
+          <label class="inputLabelBold">Nota interna</label><br>
+          <label class="inputLabel">{{domanda?.nota_interna}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<div class="row buonores" *ngIf="domanda?.note_richiedente===null || domanda?.note_richiedente===''"
+  style="padding-bottom: 0px">
+</div>
+
+<!-- Controdeduzione -->
+<div class="row buonores" *ngIf="domanda?.note_richiedente!==null && domanda?.note_richiedente!==''"
+  style="padding-bottom: 0px">
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <div class="row buonoresFilter">
+
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <label class="titleLabelSection">Controdeduzioni</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:20px;">
+        <div class="col-md-12" style="padding-left: 0px">
+          <label class="inputLabelBold">Nota</label><br>
+          <label class="inputLabel">{{domanda?.note_richiedente}}</label>
+        </div>
+      </div>
+      <div class="row col-md-12 inputLabelBold" style="padding-top:20px;padding-bottom:20px;"
+        *ngIf="this.controdeduzione!==null">
+        <div class="col-md-12">
+          Copia allegato controdeduzione
+        </div>
+      </div>
+      <div class="row col-md-12" style="padding-top:10px;"
+        *ngIf="checkAzione('scarica_allegato') && this.controdeduzione!==null">
+        <div class="col-md-12">
+          <a href={{this.urlControdeduzione}} [ngClass]="this.disabilitaAllegati ? 'disabledLink'  :null"
+            target="_blank">{{this.controdeduzione}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+
+<!-- Verifica ente -->
+<div *ngIf="checkAzione('salva_verifica_ente')" class="row buonores" style="padding-bottom: 0px">
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+    <div class="row buonoresFilter">
+
+      <div class="row col-md-12" style="left: 13px;padding-top:10px">
+        <label class="titleLabelSection" style="width:700px;">Verifiche ente gestore</label>
+      </div>
+      <div class="row col-md-12" style="left: 13px;padding-top:10px;">
+        <div class="col-md-12" style="padding-left: 0px">
+          <label class="inputLabelBold">Presenza di altre misure non compatibili</label><br>
+          <div class="custom-control" style="padding-left: 0px;">
+            <input [disabled]="!this.disabilitaAvviaVerifica" type="radio" class="checkmark" id="customConformeSi"
+              [checked]="conformeOption===true" (click)="onChangeConforme('Si')">
+            <label class="inputLabel" for="customConformeSi" style="padding-left:10px;">Si</label>&nbsp;&nbsp;
+            <input [disabled]="!this.disabilitaAvviaVerifica" type="radio" class="checkmark" id="customConformeNo"
+              [checked]="conformeOption===false" (click)="onChangeConforme('No')">
+            <label class="inputLabel" for="customConformeNo" style="padding-left:10px;">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row col-md-12" style="left: 13px;padding-top:10px;">
+        <div class="col-md-12" style="padding-left: 0px">
+          <label class="inputLabelBold">Nota ente gestore</label><br>
+          <textarea [disabled]="!this.disabilitaAvviaVerifica" rows="5" id="notaPresaInCarico"
+            [(ngModel)]="this.verificheEnteGestore.noteEnte" class="form-control" placeholder="Inserisci qui la nota">
+           </textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<!-- Verifiche -->
+<!-- <div class="row buonores" style="padding-top: 15px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <div class="buonoresFilter">
+      <div class="row col-md-12">
+        <h4 id="titolo" style="color: black; font-family: Roboto; cursor: pointer;">
+          VERIFICHE &nbsp; &nbsp;<img [@rotatedState]='state' src=" assets/img/user/frecciagiu.png"
+            (click)="toggleTable()" style="cursor: pointer;">
+        </h4>
+      </div>
+      <div class="row col-md-12 tableCronologia" style="overflow-x: auto; position: relative;" *ngIf="espansa">
+        <div *ngIf="!listaVerifiche" style="text-align: center;">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div *ngIf="listaVerifiche?.data?.length > 0">
+          <table mat-table matSort [dataSource]="listaVerifiche" class="table table-sm table-striped table-hover">
+            <ng-container matColumnDef="controllo">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Controllo</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">
+                <ng-template [ngIf]="isControllo('NESSUNA_INCOMPATIBILITA',element)">
+                  Incompatibilita' con altre misure:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('INCOMPATIBILITA_PER_CONTRATTO',element)">
+                  Incompatibilit&agrave; per contratto:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('ATECO',element)">
+                  Ateco:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('ISEE_CITTADINO',element)">
+                  Isee:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('ISEE',element)">
+                  Isee:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('CONFORMITA_PSOCIALE',element)">
+                  Presenza di altre misure non compatibili:&nbsp; {{element?.misure}}
+                </ng-template>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="fonte">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Fonte</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element?.fonte}}</td>
+            </ng-container>
+            <ng-container matColumnDef="dataControllo">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Informazione al</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">
+                {{element.dataInizioValidita | date:'dd/MM/yyyy HH:mm'}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="note">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Note</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element?.note}}</td>
+            </ng-container>
+            <ng-container matColumnDef="dataRichiesta">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Data<br>richiesta</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element.dataRichiesta}}</td>
+            </ng-container>
+            <ng-container matColumnDef="noteRichiesta">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Note<br>richiesta</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element?.noteRichiesta}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <div class="col-12 fontnormale">
+          <div class="col-12" *ngIf="listaVerifiche?.data?.length == 0" style="text-align: center;">
+            <label class="no-data-available">Non risultano verifiche collegate all'Ente Gestore</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div> -->
+
+
+<!-- Verifiche -->
+<div class="row buonores" style="padding-top: 15px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <div class="buonoresFilter">
+      <div class="row col-md-12">
+        <h4 id="titolo" style="color: black; font-family: Roboto; cursor: pointer;">
+          VERIFICHE&nbsp; &nbsp;<img [@rotatedState]='state' src=" assets/img/user/frecciagiu.png"
+            (click)="toggleTable()" style="cursor: pointer;">
+        </h4>
+      </div>
+      <div class="row col-md-12 tableCronologia" style="overflow-x: auto; position: relative;" *ngIf="this.espansa">
+        <div *ngIf="!listaVerifiche" style="text-align: center;">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div *ngIf="listaVerifiche?.data?.length > 0" class="w-100">
+          <table mat-table matSort [dataSource]="listaVerifiche" class="table table-sm table-striped table-hover">
+            <ng-container matColumnDef="controllo">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Controllo</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">
+                <ng-template [ngIf]="isControllo('NESSUNA_INCOMPATIBILITA',element)">
+                  Incompatibilita' con altre misure:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('INCOMPATIBILITA_PER_CONTRATTO',element)">
+                  Incompatibilit&agrave; per contratto:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('ATECO',element)">
+                  Ateco:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('ISEE_CITTADINO',element)">
+                  Isee:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('ISEE',element)">
+                  Isee:&nbsp; {{element?.misure}}
+                </ng-template>
+                <ng-template [ngIf]="isControllo('CONFORMITA_PSOCIALE',element)">
+                  Presenza di altre misure non compatibili:&nbsp; {{element?.misure}}
+                </ng-template>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="fonte">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Fonte</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element?.fonte}}</td>
+            </ng-container>
+            <ng-container matColumnDef="dataControllo">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Informazione al</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">
+                {{element.dataInizioValidita | date:'dd/MM/yyyy HH:mm'}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="note">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Note</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element?.note}}</td>
+            </ng-container>
+            <ng-container matColumnDef="dataRichiesta">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Data<br>richiesta</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{this.dateToLocale(element.dataRichiesta) |
+                date:'dd/MM/yyyy HH:mm'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="noteRichiesta">
+              <th class="columns_header" mat-header-cell *matHeaderCellDef>Note<br>richiesta</th>
+              <td class="celleTab" mat-cell *matCellDef="let element">{{element?.noteRichiesta}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <div class="col-12 fontnormale">
+          <div class="col-12" *ngIf="listaVerifiche?.data?.length == 0" style="text-align: center;">
+            <label class="no-data-available">Non risultano verifiche collegate all'Ente Gestore</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!--  BUTTON 2-->
+<div class="row buonores" style="padding-bottom:140px; padding-top: 30px;">
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-7">
+
+    <div class="row w-100 space_b">
+      <!-- Spazio tasto indietro -->
+      <div class="col-md-2 pl-0 align-self-start">
+        <button type="button" class="btn btn-link pl-0" (click)="backButton()">
+          INDIETRO
+        </button>
+      </div>
+      <div class="col-md-10 px-0">
+        <div class="row w-100 justify-content-end">
+          <!-- SALVA -->
+          <div class="col-sx-2 pl-2 pr-0 align-self-start"
+            *ngIf="checkAzione('salva_verifica_ente') && !this.disabilitaSalvaVerifica">
+            <button *ngIf="checkAzione('salva_verifica_ente')"
+              [disabled]="conformeOption=== null || conformeOption===undefined || this.disabilitaSalvaVerifica"
+              type="submit" class="btn btn-primary" (click)="salvaVerificaEnte()">
+              SALVA
+            </button>
+          </div>
+            <!-- AVVIA VERIFICA -->
+            <div class="col-sx-2 pl-2 pr-0 align-self-start"
+            *ngIf="checkAzione('avvia_verifica_ente') && !this.disabilitaAvviaVerifica">
+            <button *ngIf="checkAzione('avvia_verifica_ente')" type="submit" class="btn btn-success"
+              [disabled]="this.disabilitaAvviaVerifica" (click)="avviaVerificaEnte()">
+              AVVIA VERIFICA
+            </button>
+          </div>
+          <!-- CONCLUDI -->
+          <div class="col-sx-2 pl-2 pr-0 align-self-start"
+            *ngIf="checkAzione('concludi_verifica_ente') && !this.disabilitaConcludiVerifica">
+            <button *ngIf="checkAzione('concludi_verifica_ente')"
+              [disabled]="conformeOption=== null || conformeOption===undefined || this.disabilitaConcludiVerifica"
+              type="submit" class="btn btn-primary" (click)="concludiVerificaEnte()">
+              CONCLUDI
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-4"></div>
+
+</div>

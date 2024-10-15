@@ -1,0 +1,58 @@
+.filterLabel {
+  letter-spacing: -0.07px;
+  color: #212529;
+  opacity: 1;
+  white-space: nowrap;
+  text-align: left;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  height: 19px;
+}
+
+.etichette-tabella {
+  color: black;
+  border: 0px !important;
+  text-align: left;
+  vertical-align: middle !important;
+  background: #eeeeee 0% 0% no-repeat padding-box;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: bold;
+  letter-spacing: 0px;
+  opacity: 1;
+  white-space: nowrap;
+}
+
+.valori-tabella {
+  color: black;
+  border: 0px !important;
+  text-align: left;
+  vertical-align: middle !important;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  width: fit-content;
+  letter-spacing: 0px;
+  opacity: 1;
+  border-bottom: 1px solid lightgray;
+  font-weight: normal;
+}
+
+.error {
+  color: red;
+  border: 0px !important;
+  text-align: left;
+  vertical-align: middle !important;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  width: fit-content;
+  letter-spacing: 0px;
+  opacity: 1;
+  border-bottom: 1px solid lightgray;
+  font-weight: normal;
+  padding-top: 10px;
+}

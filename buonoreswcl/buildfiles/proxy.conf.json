@@ -1,0 +1,6 @@
+{
+    "/tstang2web/restfacade": {
+      "target": "xxxxx",
+      "secure": false
+    }
+}

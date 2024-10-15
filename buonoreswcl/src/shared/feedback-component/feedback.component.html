@@ -1,0 +1,16 @@
+<!--
+ * Copyright Regione Piemonte - 2024
+ * SPDX-License-Identifier: EUPL-1.2
+ -->
+
+<div class="feedback" [ngClass]="tipoFeedback">
+    <div class="row" style="padding-top: 47px;">
+        <div class="col-md-1" style="padding: 0 60px;">
+            <div *ngIf="tipoFeedback=='success'" class="icon-success"></div>
+            <div *ngIf="tipoFeedback=='error'" class="icon-error"></div>
+        </div>
+        <div class="col-md-10 feedback-message">
+            {{messaggio}}
+        </div>
+    </div>
+</div>

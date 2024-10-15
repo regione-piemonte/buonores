@@ -1,0 +1,326 @@
+<div class="row buonores" style="padding-top: 5px;padding-bottom: 15px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-3" *ngIf="this.listaSportelli && this.sportelloSelezionato" >
+    <label class="filterLabel"><b>Sportelli chiusi</b></label>
+    <ng-container>
+      <select #sportelloSel [(ngModel)]="this.sportelloSelezionato" class="form-control form-control-sm "
+        (change)="onSportelloChange()">
+        <option *ngFor="let s of this.listaSportelli" [ngValue]="s">{{s.descSportello}}</option>
+      </select>
+    </ng-container>
+  </div>
+  <div class="col-md-3" *ngIf="!(this.listaSportelli && this.sportelloSelezionato)">
+  </div>
+  <div class="col-md-7" style="max-width: 3000px;">
+    <div class="row py-2">
+      <div class="col-auto ml-auto" *ngIf="!this.client.checkEsistenzaGraduatoria">
+        <button type="submit" class="btn btn-primary px-2 py-2"
+          title="E' possibile creare una nuova graduatoria solo nel caso in cui non esista"
+          *ngIf="checkAzioni('OP-NuovaGraduatoria')" (click)="nuovaGraduatoria()">
+          Nuova Graduatoria
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div [hidden]="!this.client.checkEsistenzaGraduatoria" >
+
+  <div class="row buonores" style="padding-bottom: 5px;">
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="max-width: 3000px;">
+      <label class="filterLabel"><b>&nbsp;{{this.client.graduatoriaDescrizione.descrizioneGraduatoria}} </b>
+      </label>
+      <label class="filterLabel"><b>&nbsp;in stato: {{this.client.graduatoriaDescrizione.statoGraduatoria}} </b>
+      </label>
+      <div class="row buonoresFilter" style="padding-left: 15px;padding-right: 15px;">
+        <div class="row col-md-12" style="padding-top:30px;">
+
+          <div class="col-md-4 ">
+            <label class="filterLabel"><b>Importo totale della misura </b>
+            </label>
+            <br>
+            <input id="destinatario" class="campiricerca" type="text" readonly
+              value="{{convertiNumeroInItaliano(this.client.importoTotaleMisura)}}">
+          </div>
+          <div class="col-md-4 ">
+            <label class="filterLabel"><b>Importo buono mensile </b>
+            </label>
+            <br>
+            <input id="bMensile" class="campiricerca" type="text" readonly
+              value="{{convertiNumeroInItaliano(this.client.buonoMensile)}}">
+          </div>
+          <div class="col-md-4 ">
+            <label class="filterLabel"><b>N° mesi della misura </b>
+            </label>
+            <br>
+            <input id="nMesi" class="campiricerca" type="text" readonly value="{{this.client.mesiPerDestinatario}}">
+          </div>
+        </div>
+        <div class="row col-md-12" style="padding-top:30px;padding-bottom:30px;">
+
+          <div class="col-md-3 ">
+            <label class="filterLabel">Importo residuo totale<br>graduatoria
+            </label>
+            <br>
+            <label class="filterLabel"><b>{{convertiNumeroInItaliano(this.client.importoResiduoTotale)}}€</b>
+            </label>
+          </div>
+          <div class="col-md-3 ">
+            <label class="filterLabel">Domande in graduatoria
+            </label>
+            <br>
+            <label class="filterLabel"><b>{{this.client.soggettiFinanziabili}}</b>
+            </label>
+
+          </div>
+          <div class="col-md-3 ">
+            <label class="filterLabel">Domande finanziabili
+            </label>
+            <br>
+            <label class="filterLabel"><b>{{this.client.soggettiFinanziati}}</b>
+            </label>
+
+          </div>
+          <div class="col-md-3 ">
+            <label class="filterLabel">Totale importo destinatario
+            </label>
+            <br>
+            <label class="filterLabel"><b>{{convertiNumeroInItaliano(this.client.totaleImportoDestinatario)}}€</b>
+            </label>
+
+          </div>
+        </div>
+        <div class="row col-md-12" style="padding-bottom:30px;">
+          <!-- PARAMETRI -->
+          <table mat-table [dataSource]="this.client.parametriFinanziabili" class="mat-elevation-z8 col-md-12"
+            id="parametriTable">
+
+            <!-- AREE -->
+            <ng-container matColumnDef="AREE">
+              <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3 text-center"> AREE </th>
+              <td mat-cell *matCellDef="let element" class="valori-tabella pr-3" style="padding-bottom: 10px;">
+                <span *ngIf="element.aree == null"><b>Importo comuni NON aree interne</b> <br>
+                  <input id="nonAreaInterna" class="campiricerca" type="text" readonly
+                    value="{{convertiNumeroInItaliano(element.importoTotale)}}€">
+                </span>
+                <br>
+                <span *ngIf="element.aree == null"><b>Importo ridistribuito aree interne</b> <br>
+                  <input id="nonAreaInterna" class="campiricerca" type="text" readonly
+                    value="{{convertiNumeroInItaliano(importoTotaleRicevuto)}}€">
+                </span>
+                <span *ngIf="element.aree != null"><b>Importo comuni area interna: {{element.aree}}</b> <br>
+                  <input id="areaInterna1" class="campiricerca" type="text" readonly
+                    value="{{convertiNumeroInItaliano(element.importoTotale)}}€">
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- SOGGETTI FINANZIABILI -->
+            <ng-container matColumnDef="DOMANDE IN GRADUATORIA">
+              <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3 text-center"> DOMANDE IN GRADUATORIA
+              </th>
+              <td mat-cell *matCellDef="let element" class="valori-tabella pr-3 text-center"
+                style="padding-bottom: 10px;"> <b>{{element.soggettiFinanziabili}}</b>
+              </td>
+            </ng-container>
+            <!-- SOGGETTI FINANZIATI -->
+            <ng-container matColumnDef="DOMANDE FINANZIABILI">
+              <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3 text-center"> DOMANDE FINANZIABILI
+              </th>
+              <td mat-cell *matCellDef="let element" class="valori-tabella pr-3 text-center"
+                style="padding-bottom: 10px;"> <b>{{element.soggettiFinanziati}}</b>
+              </td>
+            </ng-container>
+
+            <!-- IMPORTO RESIDUO/AREE -->
+            <ng-container matColumnDef="IMPORTO RESIDUO/AREE">
+              <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3 text-center"> IMPORTO RESIDUO<br>AREE
+                INTERNE
+              </th>
+              <td mat-cell *matCellDef="let element" class="valori-tabella pr-3 text-center"
+                style="padding-bottom: 10px;">
+                <b *ngIf="element.aree != null">{{convertiNumeroInItaliano(max(element.importoDistribuibile,
+                  element.importoResiduo))}}&euro;</b>
+                <b *ngIf="element.aree == null">0&euro;</b>
+              </td>
+            </ng-container>
+
+            <!-- IMPORTO RESIDUO AREA NON INTERNA -->
+            <ng-container matColumnDef="IMPORTO RESIDUO AREA NON INTERNA">
+              <th mat-header-cell *matHeaderCellDef class="etichette-tabella pr-3 text-center"> IMPORTO RESIDUO<br>AREA
+                NON INTERNA
+              </th>
+              <td mat-cell *matCellDef="let element" class="valori-tabella pr-3 text-center"
+                style="padding-bottom: 10px;">
+                <b *ngIf="element.aree != null">0&euro;</b>
+                <b *ngIf="element.aree == null">{{convertiNumeroInItaliano(element.importoResiduo)}}&euro;</b>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCriteri"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCriteri;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row buonores" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10" style="max-width: 3000px;">
+
+      <table mat-table matSort [dataSource]="listaDomandeGraduatoria" multiTemplateDataRows
+        class="mb-3 table table-hover table-responsive-xl tabellabuonores hide-sort-row"
+        (matSortChange)="sortData($event)">
+
+        <!--Checkbox-->
+        <!-- <ng-container matColumnDef="check">
+          <th class="etichette-tabella pr-3" mat-header-cell *matHeaderCellDef>
+            <input type="checkbox" (click)="checkUncheckAll()" [(ngModel)]="selezionaTutto" id="tutti">
+          </th>
+          <td class="valori-tabella pr-3" mat-cell *matCellDef="let element">
+            <input type="checkbox" [(ngModel)]="element.checked" (ngModelChange)="checkSelezione()">
+          </td>
+        </ng-container> -->
+
+        <!--Posizione graduatoria-->
+        <ng-container matColumnDef="posizioneGraduatoria">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Posizione</th>
+          <td class="valori-tabella text-center pr-4" mat-cell *matCellDef="let element">
+            {{element.posizioneGraduatoria}}
+          </td>
+        </ng-container>
+
+        <!--Destinatario-->
+        <ng-container matColumnDef="destinatario">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>Destinatario</div>
+          </th>
+          <td class="valori-tabella" mat-cell *matCellDef="let element">
+            {{element.destinatarioNome}} {{element.destinatarioCognome}}<br>
+            {{element.destinatarioCF}}
+          </td>
+        </ng-container>
+
+        <!--Numero Domanda-->
+        <ng-container matColumnDef="numeroDomanda">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Numero Domanda</th>
+          <td class="valori-tabella" mat-cell *matCellDef="let element">{{element.numeroDomanda}}</td>
+        </ng-container>
+
+        <!--Punteggio sociale-->
+        <ng-container matColumnDef="punteggioSociale">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span class="pl-4">Punteggio <br> sociale</span>
+          </th>
+          <td class="valori-tabella text-center" mat-cell *matCellDef="let element">
+            <span class="pr-4">{{element.punteggioSociale}}</span>
+          </td>
+        </ng-container>
+
+        <!--I.S.E.E.-->
+        <ng-container matColumnDef="isee">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span class="pl-4">I.S.E.E.</span>
+          </th>
+          <td class="valori-tabella text-center" mat-cell *matCellDef="let element">
+            <span class="pr-5">{{convertiNumeroInItaliano(element.isee)}}</span>
+          </td>
+        </ng-container>
+
+        <!--Data invio-->
+        <ng-container matColumnDef="dataInvioDomanda">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Data invio <br> domanda</th>
+          <td class="valori-tabella" mat-cell *matCellDef="let element">{{element.dataInvioDomanda}}</td>
+        </ng-container>
+
+        <!--Stato domanda-->
+        <ng-container matColumnDef="statoDomanda">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Stato domanda</th>
+          <td class="valori-tabella" mat-cell *matCellDef="let element">{{element.statoDomanda}}</td>
+        </ng-container>
+
+        <!--Stato verifca Ente-->
+        <ng-container matColumnDef="statoVerificaEnte">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Stato verifica <br> Ente</th>
+          <td class="valori-tabella" mat-cell *matCellDef="let element">
+            <span *ngIf="element.verifiche.verifica_eg_richiesta == true">Richiesta verifica</span>
+            <span *ngIf="element.verifiche.verifica_eg_in_corso == true">Verifica in corso</span>
+            <span *ngIf="element.verifiche.verifica_eg_conclusa == true">Verifica effettuata</span>
+          </td>
+        </ng-container>
+
+        <!--Area interna-->
+        <ng-container matColumnDef="areaInterna">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Area interna</th>
+          <td class="valori-tabella" mat-cell *matCellDef="let element">{{element.areaInterna}}</td>
+        </ng-container>
+
+        <!--Importo totale-->
+        <ng-container matColumnDef="importoTotale">
+          <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>Importo totale</th>
+          <td class="valori-tabella text-center" mat-cell *matCellDef="let element">{{element.importoTotale}}€</td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!-- <div class="col-12" *ngIf="dataListaRichieste?.data?.length == 0" style="text-align: center;padding-top:30px;">
+      <label class="no-data-available">Nessuna scheda soddisfa i criteri di ricerca selezionati</label>
+    </div> -->
+
+      <mat-paginator class="paginator" [length]="listaDomandeGraduatoria?.data.length" [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]=true style="padding-top:30px;">
+      </mat-paginator>
+    </div>
+
+    <div class="col-md-1"></div>
+
+  </div>
+</div>
+<!--  BUTTON 2-->
+<div *ngIf="this.client.checkEsistenzaGraduatoria">
+  <div class="row buonores" style="padding-bottom:140px; padding-top: 30px;">
+    <div class="col-md-1"></div>
+
+
+    <div class="col-md-10" style="max-width: 3000px;">
+      <div class="row w-100 justify-content-end">
+        <!--  BUTTON SCARICA GRADUATORIA SIMULATE/DA AGGIORNARE/DA PUBBLICARE-->
+        <div class="col-sx-2 pl-2 pr-0 align-self-start"
+          *ngIf="checkStatoGraduatoriaPubblicazione || checkStatoGraduatoriaAggiornamento || checkStatoGraduatoriaProvvisoria">
+          <button type="submit" class="btn btn-primary" (click)="scaricaGraduatoria()">
+            SCARICA EXCEL
+          </button>
+        </div>
+
+        <!-- SIMULA GRADUATORIA -->
+        <div class="col-sx-2 pl-2 pr-0 align-self-start"
+          *ngIf="checkAzioni('OP-SimulaGraduatoria') && !checkStatoGraduatoriaAggiornamento && !checkStatoGraduatoriaPubblicazione">
+          <button type="submit" class="btn btn-primary" (click)="simulaGraduatoria()">
+            SIMULA GRADUATORIA
+          </button>
+        </div>
+        <!-- AGGIORNA GRADUATORIA -->
+        <div class="col-sx-2 pl-2 pr-0 align-self-start"
+          *ngIf="checkAzioni('OP-AggiornaGraduatoria') && checkStatoGraduatoriaAggiornamento">
+          <button type="submit" class="btn btn-primary" (click)="aggiornaGraduatoria()">
+            AGGIORNA GRADUATORIA
+          </button>
+        </div>
+        <!-- PUBBLICA GRADUATORIA -->
+        <div class="col-sx-2 pl-2 pr-0 align-self-start"
+          *ngIf="checkAzioni('OP-PubblicaGraduatoria') && !checkStatoGraduatoriaAggiornamento && this.client.checkPubblicazioneGraduatoria && !checkStatoGraduatoriaPubblicazione">
+          <button type="submit" class="btn btn-success" (click)="pubblicaGraduatoria()">
+            PUBBLICA GRADUATORIA
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

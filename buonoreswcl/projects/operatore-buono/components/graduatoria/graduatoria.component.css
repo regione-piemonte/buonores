@@ -1,0 +1,107 @@
+.tabellabuonores {
+	background: #FFFFFF 0% 0% no-repeat padding-box;
+	box-shadow: 1px 2px 8px #C4C4C4;
+	opacity: 1;
+}
+
+.etichette-tabella {
+	color: black;
+	border: 0px !important;
+	text-align: left;
+	vertical-align: middle !important;
+	background: #EEEEEE 0% 0% no-repeat padding-box;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: bold;
+	letter-spacing: 0px;
+	opacity: 1;
+	white-space: nowrap;
+}
+
+.valori-tabella {
+	color: black;
+	border: 0px !important;
+	text-align: left;
+	vertical-align: middle !important;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	line-height: 22px;
+	width: fit-content;
+	letter-spacing: 0px;
+	opacity: 1;
+	border-bottom: 1px solid lightgray;
+	font-weight: normal;
+}
+
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: left;
+}
+
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type{
+	padding-right: 0px;
+}
+
+
+.filterLabel{
+	letter-spacing: -0.07px;
+	color: #212529;
+	opacity: 1;
+	white-space: nowrap;
+	text-align: left;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	line-height: 19px;
+	font-weight: normal;
+	height: 19px;
+}
+.campiricerca{
+	background: #FFFFFF 0% 0% no-repeat padding-box;
+	border: 1px solid #DEE2E6;
+	border-radius: 3px;
+	opacity: 1;
+	text-align: left;
+	letter-spacing: -0.06px;
+	color: #212529;
+	opacity: 1;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	line-height: 19px;
+	font-weight: normal;
+	height: 31px;
+}
+.buonores {
+	background: #F0F3F8 !important;
+	color: #000000 !important;
+	font-family: 'Open Sans', sans-serif;
+}
+.buonoresFilter {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background: white;
+	box-shadow: 1px 2px 8px #c4c4c4;
+    border-radius: 5px;
+}
+.space_b {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+#parametriTable tr:not(:last-child) {
+	border-bottom: 0.5px solid #3f4348;
+  }

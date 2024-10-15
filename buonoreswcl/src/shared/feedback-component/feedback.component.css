@@ -1,0 +1,43 @@
+/*
+ Copyright Regione Piemonte - 2024
+ SPDX-License-Identifier: EUPL-1.2
+*/
+
+.feedback {
+    /* width: 896px;*/
+    height: 139px; 
+    margin: 13px 0;
+}
+
+.success {
+    border-left: 8px solid #1A9B73;
+    background: rgba(26, 155, 115, .1) 0% 0% no-repeat padding-box;
+}
+
+.icon-success {
+    background: url(../../assets/img/icons/Success.svg); 
+    width: 40px;
+    height: 40px;
+}
+
+.error {
+    border-left: 8px solid #B91818;
+    background: rgba(185, 24, 24, .1) 0% 0% no-repeat padding-box;
+}
+
+.icon-error {
+     background: url(../../assets/img/icons/Error.svg);
+    width: 40px;
+    height: 40px;
+}
+
+.feedback-message {
+    align-self: center;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0px;
+    color: rgba(0, 0, 0, 0.87);
+    opacity: 1;
+}

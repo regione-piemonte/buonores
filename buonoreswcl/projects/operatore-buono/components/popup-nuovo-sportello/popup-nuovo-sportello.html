@@ -1,0 +1,84 @@
+<!-- TITOLO -->
+<div class="modal-header">
+  <h4 id="titolo" style="color: black; font-family: Roboto;" class="modal-title">
+    Nuovo Sportello
+  </h4>
+</div>
+
+
+<!-- CAMPI RICERCA -->
+<div class="modal-body">
+  <form [formGroup]="nuovoSportelloForm">
+
+    <!-- RIGA 1 -->
+    <div class="row pb-2">
+      <div class="col-md-3">
+        <label class="filterLabel"><b>Anno</b></label>
+        <input formControlName="anno" id="anno" class="form-control campiricerca" type="number" readonly>
+      </div>
+
+      <div class="col-md-4">
+        <label class="filterLabel"><b>Data Inizio</b></label>
+        <input formControlName="dataInizio" id="dataInizio" (input)="validazioneDate()"
+          class="form-control campiricerca" type="date" [min]="dataInizioMin">
+          <div *ngIf="(dataInizio.invalid || controlloDataInizio) && (dataInizio.dirty || dataInizio.touched)" class="error">
+            <div *ngIf="dataInizio.invalid && dataInizio.errors.required">
+              Il campo è obbligatorio
+            </div>
+            <div *ngIf="controlloDataInizio" class="error">
+              La data d'inizio deve essere maggiore al {{dataInizioError}}
+            </div>
+          </div>
+      </div>
+
+      <div class="col-md-4">
+        <label class="filterLabel"><b>Data Fine</b></label>
+        <input formControlName="dataFine" id="dataFine" (input)="validazioneDate()" class="form-control campiricerca"
+          type="date" [min]="dataFineMin">
+        <div *ngIf="(dataFine.invalid || controlloDataFine) && (dataFine.dirty || dataFine.touched) && (dataInizio.dirty || dataInizio.touched)" class="error">
+          <div *ngIf="dataFine.invalid && dataFine.errors.required">
+            Il campo è obbligatorio
+          </div>
+          <div *ngIf="controlloDataFine" class="error">
+            La data di fine deve essere maggiore di quella d'inizio
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGA 2 -->
+    <div class="row py-2">
+      <div class="col-md-3"></div>
+      <div class="col-md-8">
+        <label class="filterLabel"><b>Descrizione</b></label>
+        <input formControlName="descrizione" id="descrizione" class="form-control campiricerca" type="text">
+        <div *ngIf="descrizione.invalid && (descrizione.dirty || descrizione.touched)" class="error">
+          <div *ngIf="descrizione.errors.required">
+            Il campo è obbligatorio
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto mr-auto">
+        <button id="btnClose" type="submit" class="btn btn-link" (click)="activeModal.dismiss('Cross click')">
+          ANNULLA
+        </button>
+      </div>
+      <div class="col-auto">
+        <button id="btnSave" [disabled]="nuovoSportelloForm.invalid || controlloDataFine || controlloDataInizio" type="submit"
+          class="btn btn-primary" (click)="creaSportello()">
+          CREA NUOVO SPORTELLO
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,337 @@
+<!-- PROSPETTO ECONOMIE -->
+<!-- <div class="row buonores" style="padding-bottom: 5px;">
+	<div class="col-md-1"></div>
+	<div class="col-md-10" style="max-width: 3000px;">
+		<label class="filterLabelEconomie"><b>&nbsp;Consultazione economie</b>
+		</label>
+		<div class="row buonoresFilter" style="padding-left: 15px;padding-right: 15px;">
+			<div class="row col-md-12" style="padding-top:30px;">
+
+				<div class="col-md-6 ">
+					<label class="filterLabelEconomie">Importo stanziato
+					</label>
+					<br>
+					<label class="filterLabelEconomie"><b>{{convertiNumeroInItaliano(100000)}}&euro;</b>
+					</label>
+				</div>
+				<div class="col-md-6 ">
+					<label class="filterLabelEconomie">Importo erogato
+					</label>
+					<br>
+					<label class="filterLabelEconomie"><b>{{convertiNumeroInItaliano(30000)}}&euro;</b>
+					</label>
+				</div>
+			</div>
+			<div class="row col-md-12" style="padding-top:30px;padding-bottom:30px;">
+
+				<div class="col-md-6 ">
+					<label class="filterLabelEconomie">Importo da erogare
+					</label>
+					<br>
+					<label class="filterLabelEconomie"><b>{{convertiNumeroInItaliano(50000)}}&euro;</b>
+					</label>
+				</div>
+				<div class="col-md-6 ">
+					<label class="filterLabelEconomie">Risparmio totale
+					</label>
+					<br>
+					<label class="filterLabelEconomie"><b>{{convertiNumeroInItaliano(20000)}}&euro;</b>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="col-md-1"></div>
+</div> -->
+<!-- FILTRI DI RICERCA -->
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px;">
+
+	<div class="col-md-1"></div>
+
+	<div class="col" style="max-width: 3000px;">
+		<form [formGroup]="searchForm">
+			<div class="row buonoresFilter">
+
+				<div class="row col-md-12" style="padding-top:30px;">
+					<div class="col-md-3 divCol3">
+						<label class="filterLabel"><b>Stato Buono</b></label>
+						<ng-container>
+							<select formControlName="statiBuono" id="statiBuono"
+								class="form-control form-control-sm campiricerca riga-totale-azzurra">
+								<option value="" id="statiBuonoOption"> </option>
+								<option *ngFor="let stato of client.listaStatiBuonoSalvato"
+									[value]="stato.buonoStatoCod" id="statiBuonoOption">{{stato.buonoStatoDesc}}
+								</option>
+							</select>
+						</ng-container>
+					</div>
+
+					<!-- <div class="col-md-3 divCol3">
+						<label class="filterLabel"><b>Numero Buono</b></label>
+						<input formControlName="numeroBuono" id="numeroBuono"
+							class="form-control campiricerca riga-totale-azzurra" type="text">
+					</div> -->
+
+					<div class="col-md-3 divCol3">
+						<label class="filterLabel"><b>Numero Domanda</b></label>
+						<input formControlName="numeroDomanda" id="numeroDomanda"
+							class="form-control campiricerca riga-totale-azzurra" type="text">
+					</div>
+
+					<div class="col-md-3 divCol3">
+					</div>
+				</div>
+				<div class="row col-md-12" style="padding-top:30px;">
+
+					<div class="col-md-3 divCol3">
+						<label class="filterLabel"><b>Destinatario </b>
+							<div style="font-size: 11px; display: inline;">(Nome, Cognome o Codice fiscale)</div>
+						</label>
+						<input formControlName="destinatario" id="destinatario" class="form-control campiricerca"
+							type="text">
+					</div>
+
+					<div class="col-md-3 divCol3">
+						<label class="filterLabel"><b>Richiedente </b>
+							<div style="font-size: 11px; display: inline;">(Nome, Cognome o Codice fiscale)</div>
+						</label>
+						<input formControlName="richiedente" maxlength="300" id="richiedente"
+							class="form-control campiricerca" type="text">
+					</div>
+
+					<div class="col-md-3 divCol3">
+						<label class="filterLabel"><b>Decesso/Fuori Regione</b></label>
+						<ng-container>
+							<select formControlName="formDecessoResidenza" id="idDecessoResidenza"
+								class="form-control form-control-sm campiricerca">
+								<option value="" id="idDecessoResidenza"> </option>
+								<option *ngFor="let element of client.listaDecessoResidenza" [value]="element"
+									id="idDecessoResidenza">
+									{{element}}</option>
+							</select>
+						</ng-container>
+					</div>
+				</div>
+        <div class="row col-md-12" style="padding-top:30px;padding-bottom:30px;">
+
+                <div class="col-md-3 divCol3">
+                  <label class="filterLabel"><b>Trasmissione Isee </b>
+                  </label>
+                  <ng-container>
+                    <select formControlName="iseeConforme" id="iseeConforme"
+                      class="form-control form-control-sm campiricerca">
+                      <option value="" id="iseeConforme"> </option>
+                      <option *ngFor="let element of client.listaIseeConforme" [value]="element"
+                        id="iseeConforme">
+                        {{element}}</option>
+                    </select>
+                  </ng-container>
+                </div>
+
+                <div class="col-md-3 divCol3">
+                  <label class="filterLabel"><b>Verifica Isee </b>
+                  </label>
+                  <ng-container>
+                    <select formControlName="iseeVerificaConforme" id="iseeVerificaConforme"
+                      class="form-control form-control-sm campiricerca">
+                      <option value="" id="iseeVerificaConforme"> </option>
+                      <option *ngFor="let element of client.listaIseeVerificaConforme" [value]="element.codEsito"
+                        id="iseeVerificaConforme">
+                        {{element.descEsito}}</option>
+					  <option value="Verifica_Isee_non_inserita" id="iseeVerificaConforme">Verifica Isee non inserita</option>
+                    </select>
+                  </ng-container>
+                </div>
+
+					<div class="col-md-3 verticalCentered divCol3">
+						<button id="btnSearch" type="submit" class="btn btn-primary block bottonifunzione"
+							[disabled]="!searchForm.valid" (click)="avviaRicerca()">
+							Cerca
+						</button>
+						<button id="btnLoading" class="btn btn-primary block" type="button" disabled
+							style="display: none;">
+							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							Loading...
+						</button>
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+	<div class="col-md-1"></div>
+
+</div>
+
+
+<!-- DATI RISULTATI DI RICERCA -->
+<div class="row py-1 buonores" style="padding-top: 5px; padding-bottom: 5px;" *ngIf="ricercaEffettuata">
+	<div class="col-md-1"></div>
+
+	<div class="col-md-5" style="margin-bottom: 10px;">
+
+		<span class="results" style="margin-bottom: 10px;">Risultati: {{ dataListaRichieste?.data.length }}</span>
+
+	</div>
+
+	<div class="col-md-6"></div>
+	<div class="col-md-1"></div>
+	<div class="col-md-5 align-self-end" style="margin-bottom: 15px;">
+		<button type="button" class="btn btn-link pl-0" (click)="annullaRicerca()" style="color: #006CB4;">
+			<span style="margin-bottom: 10px;"></span>
+			<b style="font-size: 14px;">Annulla Ricerca</b>
+		</button>
+	</div>
+	<div class="col-md-6"></div>
+</div>
+
+<!-- RISULTATI DI RICERCA -->
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px; " [hidden]="!ricercaEffettuata">
+	<div class="col-md-1"></div>
+
+	<div class="col-md-10" style="max-width: 3000px;">
+
+		<table mat-table matSort [dataSource]="dataListaRichieste" multiTemplateDataRows
+			class="mb-3 table table-hover table-responsive-xl tabellabuonores" (matSortChange)="sortData($event)">
+			<!-- <ng-container matColumnDef="check">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef>
+					<input type="checkbox" (click)="checkUncheckAll()" [(ngModel)]="selezionaTutto" id="tutti">
+				</th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element">
+					<input type="checkbox" [(ngModel)]="element.checked" (ngModelChange)="checkSelezione()">
+				</td>
+			</ng-container> -->
+
+			<!-- <ng-container matColumnDef="numeroBuono">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Numero
+					Buono </th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element"> {{element.buonoCod}} </td>
+			</ng-container> -->
+
+			<ng-container matColumnDef="numeroDomanda">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Numero
+					Domanda </th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element"> {{element.numeroDomanda}} </td>
+			</ng-container>
+
+			<!--Destinatario-->
+			<ng-container matColumnDef="destinatario">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+					<div>Destinatario</div>
+				</th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element">
+					{{element.nomeDestinatario}} {{element.cognomeDestinatario}}<br>
+					{{element.destinatarioCf}}
+				</td>
+			</ng-container>
+
+			<!--Richiedente-->
+			<ng-container matColumnDef="richiedente">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+					<div>Richiedente</div>
+				</th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element">
+					{{element.nomeRichiedente}} {{element.cognomeRichiedente}}<br>
+					{{element.richiedenteCf}}
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="statoBuono">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header> Stato
+					Buono </th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element">
+					{{element.buonoStatoCod}}
+				</td>
+			</ng-container>
+
+			<!-- Date decorrenza buono -->
+			<ng-container matColumnDef="dateDecorrenzaBuono">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef style="padding-right: 10px;">
+					Date Decorrenza <br> Buono </th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element" style="padding-right: 10px;">
+					<span *ngIf="element.decorrenzaInizio && element.decorrenzaFine">{{
+						element.decorrenzaInizio }} - {{
+						element.decorrenzaFine }}</span>
+				</td>
+			</ng-container>
+
+			<!-- Data decesso/Fuori Regione -->
+			<ng-container matColumnDef="decessoResidenza">
+				<th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+					Decesso<br>Fuori Regione
+				</th>
+				<td class="valori-tabella" mat-cell *matCellDef="let element">
+					<span *ngIf="element.dataDecesso !== null">{{element.dataDecesso}} (D)</span>
+					<span
+						*ngIf="element.dataCambioResidenza !== null && element.dataDecesso === null">{{element.dataCambioResidenza}}
+						(R)</span>
+				</td>
+			</ng-container>
+      <!-- isee conforme -->
+      <ng-container matColumnDef="iseeConforme">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+			Trasmissione Isee
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          <span *ngIf="element.iseeConforme !== null">{{element.iseeConforme}}</span>
+        </td>
+      </ng-container>
+      <!-- isee verifica conforme -->
+      <ng-container matColumnDef="iseeVerificaConforme">
+        <th class="etichette-tabella" mat-header-cell *matHeaderCellDef mat-sort-header>
+			Verifica Isee
+        </th>
+        <td class="valori-tabella" mat-cell *matCellDef="let element">
+          <span *ngIf="element.iseeVerificaEsitoCod !== null">{{element.iseeVerificaEsitoCod}}</span>
+        </td>
+      </ng-container>
+			<ng-container matColumnDef="azione">
+				<th class="etichette-tabella text-center" mat-header-cell *matHeaderCellDef>
+					<div class="text-center">Azioni </div>
+				</th>
+				<td class="pulsanti-azioni text-center" mat-cell *matCellDef="let element">
+					  <button *ngIf="checkAzione('OP-BuonoDettaglio')" type="button"
+            (click)="routeTo('rendicontazione-op', element, '/buono-dettaglio')" class="btn">
+            <mat-icon style="color: #006CB4;" matTooltip="Dettaglio Buono"
+              [matTooltipPosition]="'above'" matTooltipClass="tooltipsportello">description</mat-icon>
+					</button>
+					<button *ngIf="checkAzione('OP-BuonoDettaglio')" type="button"
+						(click)="routeTo('rendicontazione-op', element, '/stato-avanzamento-istruttoria')" class="btn">
+						<mat-icon style="color: #006CB4;" matTooltip="Stato avanzamento istruttoria di FinPiemonte"
+							[matTooltipPosition]="'above'" matTooltipClass="tooltipsportello">note_add</mat-icon>
+					</button>
+				</td>
+			</ng-container>
+
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+
+		<div class="col-12" *ngIf="dataListaRichieste?.data?.length == 0" style="text-align: center;padding-top:30px;">
+			<label class="no-data-available">Nessuna scheda soddisfa i criteri di ricerca selezionati</label>
+		</div>
+
+		<mat-paginator class="paginator" [length]="dataListaRichieste?.data.length" [pageSize]="10"
+			[pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]=true style="padding-top:30px;">
+		</mat-paginator>
+	</div>
+
+	<div class="col-md-1"></div>
+
+</div>
+<!-- <div class="tab-row">
+	<div class="row justify-content-end">
+		<div class="col-6" style="padding: 0 !important;">
+		</div>
+		<div class="col-5 buttonContainer text-right" style="padding: 0 !important;">
+			<button *ngIf="checkAzione('OP-RevocaBuono') && ricercaEffettuata" type="submit" class="btn btn-primary"
+				style="width: 220px; margin: 30px;" (click)="richiestaRevoca('Nota per revoca')" data-toggle="tooltip"
+				[disabled]="checkDisabled(null, 'PRESA-CARICO')">
+				REVOCA BUONO
+			</button>
+		</div>
+		<div class="col-1" style="padding: 0 !important;"></div>
+	</div>
+</div> -->

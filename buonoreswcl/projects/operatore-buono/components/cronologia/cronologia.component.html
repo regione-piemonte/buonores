@@ -1,0 +1,41 @@
+<div class="row" style="background: white; padding-top: 20px; padding-bottom: 20px; box-shadow: 1px 2px 8px #C4C4C4;">
+    <div class="col-md-12">
+        <div class="cronologia" style="padding-bottom:10px;">Cronologia &nbsp; &nbsp;<img [@rotatedState]='state' src="assets/img/user/frecciagiu.png" (click)="apricronologia()" style="cursor: pointer;"></div>
+	<div *ngIf="listaCronologia?.data?.length > 0">
+		<table mat-table matSort [dataSource]="listaCronologia" class="table table-sm table-striped table-hover" *ngIf="espansa">
+			<ng-container matColumnDef="dataOra">
+				<th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Data e Ora</th>
+				<td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.dataInizioValidita | date:'dd/MM/yyyy HH:mm'}} </td>
+			</ng-container>
+			<ng-container matColumnDef="utente">
+				<th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Utente</th>
+				<td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.utente}} </td>
+			</ng-container>
+			<ng-container matColumnDef="statoDomanda">
+				<th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Stato domanda</th>
+				<td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.statoDomanda}} </td>
+			</ng-container>
+			<ng-container matColumnDef="notaEnte">
+				<th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Nota per Cittadino</th>
+				<td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.note}} </td>
+			</ng-container>
+			<ng-container matColumnDef="notaInterna">
+				<th class="columns_header pr-1" mat-header-cell *matHeaderCellDef>Nota Interna</th>
+				<td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.notaInterna}} </td>
+			</ng-container>	
+			<ng-container matColumnDef="notaxEnte">
+				<th class="columns_header pr-1" mat-header-cell *matHeaderCellDef style="white-space: nowrap;">Nota per Ente</th>
+				<td class="celleTab pr-1" mat-cell *matCellDef="let element"> {{element.notaEnte}} </td>
+			</ng-container>	
+		  
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+	</div>
+	 <div class="col-12 fontnormale">
+            <div class="col-12" *ngIf="listaCronologia?.data?.length == 0" style="text-align: center;">
+                <label class="no-data-available">Non risultano cronologie collegate alla domanda</label>
+            </div>
+        </div>
+</div>
+</div>

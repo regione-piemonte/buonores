@@ -1,0 +1,72 @@
+<div class="modal-header row col-md-12">
+    <div id="titolo" class="row col-md-12 modal-title titlePage" style="padding-bottom:60px;">
+        <div class="col-md-10" style="padding-left:0px;">
+            Revoca del buono
+        </div>
+        <div class="col-md-2">
+            <button style="outline: none;" type="button" class="close" aria-label="Close"
+                (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true" style="font-size:40px;font-weight:bold">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="row col-md-12 inputLabelNote">
+        Inserisci Note
+    </div>
+
+</div>
+
+<div class="row buonores" style="padding-top: 5px; padding-bottom: 5px; background-color: white !important;">
+    <div class="modal-body" style="overflow-x: auto; position: relative;">
+
+        <div class="row col-md-12">
+            <form [formGroup]="chiusuraForm" class="popup-form">
+
+                <div class="row col-md-12">
+                    Per Ente Gestore
+                </div>
+                <div class="row col-md-12">
+                    <mat-form-field class="popup-full-width">
+                        <textarea matInput type="text" formControlName="notaEnte"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="row col-md-12">
+                    Interna
+                </div>
+                <div class="row col-md-12">
+                    <mat-form-field class="popup-full-width">
+                        <textarea matInput type="text" formControlName="notaInterna"></textarea>
+                    </mat-form-field>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <div class="col-md-2"></div>
+
+    <div class="row col-md-12 button">
+
+        <div class="row col-md-12">
+            <div class="col-md-2">
+                <button id="btnClose" type="submit" class="btn btn-link" (click)="activeModal.dismiss('Cross click')">
+                    ANNULLA
+                </button>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button id="btnSave" type="submit" class="btn btn-primary button1" (click)="conferma()">
+                    CONFERMA
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-2"></div>
+</div>

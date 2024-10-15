@@ -1,0 +1,214 @@
+<!-- Home -->
+<div class="row buonores" style="padding-top: 30px">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2">
+    <button type="button" class="btn btn-link pl-0" (click)="backButton()">
+      <span class="fas fa-chevron-left"></span>
+      <span style="margin-bottom: 10px; margin-left: 10px"></span>
+      Home
+    </button>
+  </div>
+
+  <div class="col-md-3"></div>
+</div>
+
+
+<div class="row buonores" style="padding-top: 30px">
+  <div class="col-md-1"></div>
+  <div class="col-md-auto">
+    <label class="text-nowrap titlePage">Domanda: {{ this.numeroDomanda }}</label>
+    <!-- <br>
+    <label class="text-nowrap titlePage">Buono: {{ this.buonoCod }}</label> -->
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!-- Box informazioni e decorrenza buono -->
+<div class="row buonores" style="padding-top: 30px; padding-bottom: 30px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="cardTitle">Informazioni</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-auto" *ngIf="buonoInfo">
+            <label for="statoBuonoId" class="pDettaglio" *ngIf="buonoInfo.buonoStatoCod"><strong>Stato del buono</strong></label>
+            <p class="pDettaglio" *ngIf="buonoInfo.buonoStatoCod">{{ buonoInfo.buonoStatoCod }}</p>
+          </div>
+          <div class="col-md-auto" *ngIf="!buonoattivo && buonoInfo">
+            <label for="statoBuonoId" class="pDettaglio" *ngIf="buonoInfo.validitaFine">
+              <strong>Data richiesta
+                <span *ngIf="buonoInfo.buonoStatoCod === 'RINUNCIATO'"> decorrenza Rinuncia</span>
+                <span *ngIf="buonoInfo.buonoStatoCod === 'REVOCATO'"> decorrenza Revoca</span>
+              </strong>
+            </label>
+            <p class="pDettaglio" *ngIf="buonoInfo.validitaFine">{{ buonoInfo.validitaFine }}</p>
+          </div>
+          <div class="col-md-auto" *ngIf="!buonoattivo && buonoInfo">
+            <label for="statoBuonoId" class="pDettaglio">
+              <strong>Data
+                <span *ngIf="buonoInfo.buonoStatoCod === 'RINUNCIATO'"> decorrenza Rinuncia</span>
+                <span *ngIf="buonoInfo.buonoStatoCod === 'REVOCATO'"> decorrenza Revoca</span>
+              </strong>
+            </label>
+            <p class="pDettaglio">
+              <span *ngIf="buonoInfo.buonoStatoCod === 'RINUNCIATO'">{{ buonoInfo.rinunciaDataDecorrenza }}</span>
+              <span *ngIf="buonoInfo.buonoStatoCod === 'REVOCATO'">{{ buonoInfo.revocaDataDecorrenza }}</span>
+            </p>
+          </div>
+           <div class="col-md-auto" *ngIf="buonoInfo">
+            <label for="notaBuonoId" class="pDettaglio" *ngIf="buonoInfo.notaRevoca"><strong>Nota Revoca</strong></label>
+            <p class="pDettaglio" *ngIf="buonoInfo.notaRevoca">{{ buonoInfo.notaRevoca }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="cardTitle">Decorrenza Buono</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-auto">
+            <label for="decorrenzaInizioId" class="pDettaglio"><strong>Data decorrenza buono</strong></label>
+            <p class="pDettaglio">{{ decorrenzaBuonoIni.decorrenzaInizio }}</p>
+          </div>
+          <div class="col-md-auto">
+            <label for="decorrenzaInizioId" class="pDettaglio"><strong>Data fine buono</strong></label>
+            <p class="pDettaglio">{{ decorrenzaBuonoIni.decorrenzaFine }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<!-- Box segnalazioni -->
+<div class="row buonores" style="padding-bottom: 30px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-8">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="cardTitle">Segnalazioni</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul *ngIf="!noBoxSegnalazioni">
+          <li style="font-size: 20px;" *ngIf="verificaInfo && !verificaInfo?.nessunaIncompatibilita && verificaInfo?.verificaData">
+            <div class="row" *ngIf="verificaInfo && !verificaInfo?.nessunaIncompatibilita">
+              <div class="col-md-auto">
+                <p class="pDettaglio">
+                  <strong>Incompatibilit&agrave;</strong> segnalata dall'ente in data
+                  <strong>
+                    <span *ngIf="verificaInfo?.verificaData"> {{verificaInfo?.verificaData}}</span>
+                  </strong>
+                </p>
+                <p class="pDettaglio">
+                  &nbsp;&nbsp;&nbsp;&nbsp;<strong>Note</strong>: {{ verificaInfo?.verificaNote}}
+                </p>
+              </div>
+            </div>
+          </li>
+          <li style="font-size: 20px;" *ngIf="domanda?.dataDecesso || domanda?.dataResidenzaExtraregione">
+            <div class="row">
+              <div class="col-md-auto" *ngIf="domanda?.dataDecesso || domanda?.dataResidenzaExtraregione">
+                <p class="pDettaglio">
+                  Perdita dei requisiti per
+                  <strong>
+                    <span *ngIf="domanda?.dataDecesso"> decesso </span>
+                    <span *ngIf="domanda?.dataResidenzaExtraregione"> cambio residenza </span>
+                  </strong>
+                  in data
+                  <strong>
+                    <span *ngIf="domanda?.dataDecesso"> {{ domanda?.dataDecesso | date : "dd/MM/yyyy" }}. </span>
+                    <span *ngIf="domanda?.dataResidenzaExtraregione"> {{domanda?.dataResidenzaExtraregione | date : "dd/MM/yyyy"}}. </span>
+                  </strong>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div *ngIf="noBoxSegnalazioni" class="mt-2 mb-2 ml-3">
+          Non ci sono segnalazioni
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<!-- Storico rendicontazioni -->
+<div class="row buonores" style="padding-bottom: 30px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-8">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="cardTitle">Stato rendicontazioni</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="d-flex" *ngIf="this.anni.length > 0">
+          <div *ngFor="let option of anni" class="ml-3 mb-2">
+            <div class="mr-1">
+              <label style="font-size: 18px;">
+                <!-- <input type="radio" name="options" [(ngModel)]="selectedOption" [value]="option" (ngModelChange)="onNumberChange()"> -->
+                {{ option }}
+              </label>
+            </div>
+          </div>
+          <div class="ml-3 mb-2" *ngIf="this.anni.length > 1">
+            <div class="mr-1">
+              <label style="font-size: 18px;">
+                <!-- <input type="radio" name="options" [(ngModel)]="selectedOption" (ngModelChange)="onNumberChange('tutti')"> -->
+                Tutti gli anni
+              </label>
+            </div>
+          </div>
+        </div>
+        <table mat-table class="table tabellabuonores" [dataSource]="this.listaStoricoRendicontazioniFiltered">
+
+          <ng-container matColumnDef="Anno">
+            <th mat-header-cell *matHeaderCellDef class="etichette-tabella">Anno</th>
+            <td mat-cell *matCellDef="let storico" class="valori-tabella"> {{ storico.anno }} </td>
+          </ng-container>
+          <ng-container matColumnDef="Mese">
+            <th mat-header-cell *matHeaderCellDef class="etichette-tabella">Mese</th>
+            <td mat-cell *matCellDef="let storico" class="valori-tabella"> {{ storico.mese }} </td>
+          </ng-container>
+          <ng-container matColumnDef="Esito">
+            <th mat-header-cell *matHeaderCellDef class="etichette-tabella">Stato</th>
+            <td mat-cell *matCellDef="let storico" class="valori-tabella"> {{ storico.esito }} </td>
+          </ng-container>
+          <ng-container matColumnDef="Note">
+            <th mat-header-cell *matHeaderCellDef class="etichette-tabella">Nota esito istruttoria</th>
+            <td mat-cell *matCellDef="let storico" class="valori-tabella"> {{ storico.note }} </td>
+          </ng-container>
+          <ng-container matColumnDef="DataDichiarazione">
+            <th mat-header-cell *matHeaderCellDef class="etichette-tabella">Data invio a Finpiemonte</th>
+            <td mat-cell *matCellDef="let storico" class="valori-tabella">
+              <span *ngIf="storico.esito !== 'SABBATICO'">{{ storico.dataDichiarazione }} </span>
+            </td>
+          </ng-container>
+           <ng-container matColumnDef="DataIstruttoria">
+            <th mat-header-cell *matHeaderCellDef class="etichette-tabella">Data Esito Istruttoria</th>
+            <td mat-cell *matCellDef="let storico" class="valori-tabella">
+              <span *ngIf="storico.esito !== 'SABBATICO'">{{ storico.dataIstruttoria }} </span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+      <div *ngIf="this.listaStoricoRendicontazioniFiltered.length <= 0" class="mt-2 mb-2 ml-3">
+        <span *ngIf="this.anni.length > 0">Non ci sono dati per l'anno selezionato</span>
+        <span *ngIf="this.anni.length <= 0">Non ci sono dati sulle storico delle rendicontazioni</span>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3"></div>
+</div>
