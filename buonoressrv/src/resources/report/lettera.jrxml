@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Domanda" language="groovy" pageWidth="595" pageHeight="822" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="164d6a24-5da5-4dae-820a-4cb270867da1">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="17"/>
+	<property name="ireport.y" value="0"/>
+	<style name="NoRotate" mode="Transparent" forecolor="#FBE4D5" hAlign="Center" vAlign="Middle" rotation="None" fontName="Times New Roman" fontSize="90"/>
+	<parameter name="TIPO_LETTERA" class="java.lang.String"/>
+	<parameter name="TESTO_EMAIL" class="java.lang.String"/>
+	<detail>
+		<band height="802">
+			<textField>
+				<reportElement x="173" y="5" width="223" height="20" uuid="662e52c8-7096-4b20-8916-9c5a9072ad1d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TIPO_LETTERA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="42" width="533" height="741" uuid="25c5e03b-3f95-4b5a-b688-e14e9f446916"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TESTO_EMAIL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

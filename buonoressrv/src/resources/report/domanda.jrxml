@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2023-04-20T16:25:18 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Domanda" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="164d6a24-5da5-4dae-820a-4cb270867da1">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="13"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="NoRotate" mode="Transparent" forecolor="#FBE4D5" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" rotation="None" fontName="Times New Roman" fontSize="90"/>
+	<parameter name="RICHIEDENTE_DENOMINAZIONE" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_NATOA" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_NATOIL" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_RESIDENTEA" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_RESIDENTEIND" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_CF" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_TEL" class="java.lang.String"/>
+	<parameter name="RICHIEDENTE_MAIL" class="java.lang.String"/>
+	<parameter name="SESTESSO" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DESTINATARIO_DENOMINAZIONE" class="java.lang.String"/>
+	<parameter name="DESTINATARIO_NATOA" class="java.lang.String"/>
+	<parameter name="DESTINATARIO_RESIDENTEA" class="java.lang.String"/>
+	<parameter name="DESTINATARIO_RESIDENTEIND" class="java.lang.String"/>
+	<parameter name="DESTINATARIO_CF" class="java.lang.String"/>
+	<parameter name="STUDIO_PRIMO" class="java.lang.Boolean"/>
+	<parameter name="STUDIO_SECONDO" class="java.lang.Boolean"/>
+	<parameter name="STUDIO_TERZO" class="java.lang.Boolean"/>
+	<parameter name="DESTINATARIO_NATOIL" class="java.lang.String"/>
+	<parameter name="RAPPORTO_POTESTA" class="java.lang.Boolean"/>
+	<parameter name="RAPPORTO_CONIUGE" class="java.lang.Boolean"/>
+	<parameter name="RAPPORTO_PARENTE" class="java.lang.Boolean"/>
+	<parameter name="RAPPORTO_TUTELA" class="java.lang.Boolean"/>
+	<parameter name="RAPPORTO_CURATELA" class="java.lang.Boolean"/>
+	<parameter name="RAPPORTO_SOSTEGNO" class="java.lang.Boolean"/>
+	<parameter name="RAPPORTO_NUCLEO" class="java.lang.Boolean"/>
+	<parameter name="ULTRA65" class="java.lang.Boolean"/>
+	<parameter name="PUNTEGGIO" class="java.lang.String"/>
+	<parameter name="CONTRATTO_TIPO_RSA" class="java.lang.Boolean"/>
+	<parameter name="CONTRATTO_TIPO_NESSUNO" class="java.lang.Boolean"/>
+	<parameter name="RSA_DENOMINAZIONE" class="java.lang.String"/>
+	<parameter name="RSA_COMUNE" class="java.lang.String"/>
+	<parameter name="RSA_INDIRIZZO" class="java.lang.String"/>
+	<parameter name="DGR" class="java.lang.String"/>
+	<parameter name="NUMERO_DOMANDA" class="java.lang.String"/>
+	<parameter name="DESTINATARIO_DOMICILIO" class="java.lang.String"/>
+	<parameter name="DESTINATARIO_DOMICILIOIND" class="java.lang.String"/>
+	<parameter name="RAPPORTO_ALTRO" class="java.lang.Boolean"/>
+	<parameter name="NESSUNA_INCOMPATIBILITA" class="java.lang.Boolean"/>
+	<parameter name="ELENCO_ALLEGATI" class="java.lang.String"/>
+	<parameter name="ASL" class="java.lang.String"/>
+	<parameter name="NESSUN_TITOLO_STUDIO" class="java.lang.Boolean"/>
+	<parameter name="LAVORO_DESTINATARIO" class="java.lang.Boolean"/>
+	<parameter name="DATA_INI_CONTRATTO" class="java.lang.String"/>
+	<parameter name="STATO" class="java.lang.String"/>
+	<parameter name="ELENCO_ALLEGATI_CONTRODEDUZIONE" class="java.lang.String"/>
+	<parameter name="NOTA_CONTRODEDUZIONE" class="java.lang.String"/>
+	<parameter name="CONTRODEDUZIONE" class="java.lang.Boolean"/>
+	<detail>
+		<band height="822">
+			<rectangle>
+				<reportElement x="32" y="798" width="10" height="10" uuid="769361d5-a114-4d1e-8a1e-2a729eb6481a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="61" y="773" width="10" height="10" uuid="aa73b40b-d594-4f1b-a689-b52099bcbb78"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="61" y="733" width="10" height="10" uuid="18dd36eb-bd95-4013-8534-eccdf69c415f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="61" y="474" width="10" height="10" uuid="38c5478a-1083-4bae-b4c4-08aac07f113c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="61" y="452" width="10" height="10" uuid="fd3b7f6c-4e6f-495c-8b1a-c356e0764b0a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="61" y="433" width="10" height="10" uuid="acf39b04-4bbe-4ca7-b93a-18d8cc32a2b9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="12" y="383" width="10" height="10" uuid="4505710d-1fdb-404c-a691-0b824e9e697f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="166" width="78" height="16" uuid="34bfe5d2-efea-4d1c-bcf8-6f139de65f8f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Il/la sottoscritto/a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="25" width="228" height="15" uuid="7f99dd2e-0261-445b-944d-4e641f96c6e5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(Art. 46 DPR n. 445 del 28 dicembre 2000)]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="90" y="167" width="465" height="16" uuid="61bd4243-97ae-49bd-a6f2-3b3e3dd5acb9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_DENOMINAZIONE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="123" y="10" width="318" height="16" uuid="5149d282-fc77-4d55-8a7e-60a0a5f23eb3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DICHIARAZIONE SOSTITUTIVA DI CERTIFICAZIONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="43" width="363" height="16" uuid="611278be-be09-422b-9f98-11c9f496026c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DICHIARAZIONE SOSTITUTIVA DI ATTO DI NOTORIETA']]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="60" width="233" height="16" uuid="842a4463-e03c-459f-a2f2-bf8be0f9e191"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(Art. 47 DPR n. 445 del 28 dicembre 2000)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="151" y="120" width="277" height="16" uuid="6092f5ab-921a-4518-941a-56fe613443d2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RICHIESTA "BUONO RESIDENZIALITA'"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="83" width="305" height="26" uuid="c41ca488-d7b4-442d-a860-995013108826"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA["Rafforzamento del supporto alla persona non autosufficiente
+correlato all’acquisto di servizi di cura e di assistenza residenziali"]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="53" y="186" width="358" height="16" uuid="4381f174-5cfc-4c42-b04c-1136bfe6a530"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_NATOA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="186" width="39" height="16" uuid="c0535bd8-9d60-453a-82b9-e58c96ba2550"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[nato/a a]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="431" y="186" width="125" height="16" uuid="e5d7dd7d-f851-41fe-b53f-241287b3d6ab"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_NATOIL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="186" width="15" height="16" uuid="6b1343e7-a53c-4112-aa57-076629bc5c9b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[il]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="59" y="206" width="240" height="16" uuid="4ef274b7-8c62-4861-b188-f3eb0caba6a1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_RESIDENTEA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="205" width="46" height="16" uuid="906a91ca-3999-4e1a-98dd-d3129346c08c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[residente a]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="338" y="206" width="218" height="16" uuid="e74727c3-55c4-40eb-bb42-a2505bc71ac9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_RESIDENTEIND}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="300" y="205" width="37" height="16" uuid="f648f459-6e10-45da-864e-642ce9f07a2b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[indirizzo]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="224" width="485" height="16" uuid="9aa1d9f1-a391-4b02-a65b-7cc6f28ee6b4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_CF}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="224" width="58" height="16" uuid="f5bf2896-8bf9-41cf-ae50-f58163d38e83"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[codice fiscale]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="242" width="506" height="16" uuid="76123b2f-4eea-44d8-ad10-eab3df2b4875"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_TEL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="242" width="37" height="16" uuid="79daaa3a-cfd3-4a08-8562-c77b1627ffb8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[tel. cell.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="37" y="264" width="518" height="16" uuid="c74f5183-a546-495e-8358-77dae6a1f049"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RICHIEDENTE_MAIL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="264" width="25" height="16" uuid="df080739-bcd2-4115-aa57-600da7f2f9f5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="327" width="378" height="16" uuid="592af50b-7ec6-4745-82ec-85d21d8bb922"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[presenta istanza per la concessione del "BUONO RESIDENZIALITA'"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="353" width="173" height="16" uuid="2a7ffdda-4a91-4caf-8c15-3496ea4bdbec"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[a favore di (soggetto DESTINATARIO)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="383" width="10" height="10" uuid="88a45da6-69f4-42cc-8d87-6cf113e8e1c6">
+					<printWhenExpression><![CDATA[$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="381" width="284" height="16" uuid="445fae22-59cf-492c-8731-dd923af83a6c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[sé stesso (si prega di compilare i seguenti ulteriori campi):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="405" width="74" height="16" uuid="da5ecb50-2c02-4953-a3de-d4d89eddadbf"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Titolo di studio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="430" width="348" height="16" uuid="c640f53f-c043-4ae3-8671-d940a1787b5a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[diploma di istruzione secondaria di primo grado (licenza media) o inferiore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="433" width="10" height="10" uuid="1295d3fa-4057-479f-9907-e7415cd35aae">
+					<printWhenExpression><![CDATA[$P{SESTESSO} && $P{STUDIO_PRIMO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="450" width="284" height="16" uuid="bf07ba77-0625-4452-bce4-e9eadf677e9e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[diploma di istruzione secondaria di secondo grado o post-secondaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="452" width="10" height="10" uuid="1679a963-b639-40cb-9eb9-23e1d3f1fbf2">
+					<printWhenExpression><![CDATA[$P{SESTESSO} && $P{STUDIO_SECONDO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="472" width="284" height="16" uuid="84cf24bb-715f-43f6-847b-1f696c153be3"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[diploma di istruzione terziaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="474" width="10" height="10" uuid="3e6fef11-568e-487f-94d1-3e1e5ce686a9">
+					<printWhenExpression><![CDATA[$P{SESTESSO} && $P{STUDIO_TERZO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="141" width="103" height="16" uuid="5515fb0c-0f6d-468f-b2c3-83ebf5fef17d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero Richiesta :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="272" y="143" width="283" height="16" uuid="878134fd-9e6d-4cbe-9307-8ff3aa36d28b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NUMERO_DOMANDA}+ ' ' + $P{STATO}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="12" y="550" width="10" height="10" uuid="71ef2a9d-da60-44ca-b0d8-8c312f8c0be4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="548" width="284" height="16" uuid="9501ab67-855b-406d-859b-2d294e6c6f78"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[altra persona (si prega di indicare i seguenti dati):]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="61" y="607" width="238" height="16" uuid="0c6c5631-a04b-4473-a705-3980af0066b4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_RESIDENTEA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="625" width="488" height="16" uuid="0998a062-6b1c-4144-a006-80c6cb2e3220"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_CF}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="341" y="607" width="218" height="16" uuid="29d473df-0612-4299-aa63-1c51a11f6617"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_RESIDENTEIND}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="342" y="663" width="218" height="16" uuid="7c4eb70e-0b62-48c4-b619-fdabe5a750d4">
+					<printWhenExpression><![CDATA[!$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_DOMICILIOIND}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="418" y="588" width="15" height="16" uuid="3919faaa-5a26-43d6-bdd4-c96b97ec39ab"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[il]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="434" y="588" width="125" height="16" uuid="ae23f099-bcc5-4f5e-b7d1-995dec668e72"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_NATOIL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="625" width="58" height="16" uuid="296f8df7-90f9-4583-9e71-6afba4d02d4a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[codice fiscale]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="606" width="47" height="16" uuid="ecac7178-3eef-4b8e-8b7c-b219124939e9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[residente a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="662" width="37" height="16" uuid="78cabc36-f078-485d-894a-00f208b534f2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[indirizzo]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="90" y="571" width="465" height="16" uuid="9e226970-ca78-4bd7-beda-2ec2887313a4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_DENOMINAZIONE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="570" width="78" height="16" uuid="73e06e8f-dffc-421b-a91f-9b0a7fb5bedc"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[cognome e nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="606" width="37" height="16" uuid="c7615e95-cc28-4b2e-b04a-2b111523b37f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[indirizzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="662" width="55" height="16" uuid="adc9aba9-f304-4a63-9429-6427893e82e9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[domiciliato a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="588" width="39" height="16" uuid="df10e432-f8e5-4517-b450-414134008035"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[nato/a a]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="65" y="663" width="238" height="16" uuid="fb46ea22-4d97-40e4-bfa1-a9a88bd319c5">
+					<printWhenExpression><![CDATA[!$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_DOMICILIO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="53" y="588" width="358" height="16" uuid="a2a1bf5e-eb99-40fa-a7cd-0c950bb7ef91"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESTINATARIO_NATOA}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="61" y="753" width="10" height="10" uuid="2105ed87-3be8-4df5-bee2-31d10e73b3f8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="61" y="715" width="10" height="10" uuid="6cee6068-97d8-4f0c-94a2-352f1d8c75e3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="685" width="74" height="16" uuid="4573a7b6-34e6-4b74-931d-637dfe24772f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Titolo di studio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="751" width="284" height="16" uuid="ef532bf4-f603-467c-82cd-159b093954c5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[diploma di istruzione terziaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="731" width="284" height="16" uuid="f701b41c-d381-4083-872b-a1f17891ec0f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[diploma di istruzione secondaria di secondo grado o post-secondaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="753" width="10" height="10" uuid="ec949ce2-e201-4aa5-aeef-7da4ef85a20d">
+					<printWhenExpression><![CDATA[!$P{SESTESSO} && $P{STUDIO_TERZO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="712" width="348" height="16" uuid="d014ddda-daf6-48cc-87e2-6f6af12a128f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[diploma di istruzione secondaria di primo grado (licenza media) o inferiore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="733" width="10" height="10" uuid="6d16af6c-e16b-4198-b3c5-357f464076ae">
+					<printWhenExpression><![CDATA[!$P{SESTESSO} && $P{STUDIO_SECONDO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="715" width="10" height="10" uuid="d64b8dcb-2fdc-4271-960f-90b6e5ab28d5">
+					<printWhenExpression><![CDATA[!$P{SESTESSO} && $P{STUDIO_PRIMO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="550" width="10" height="10" uuid="8f46a8df-5d83-4114-ab0a-8cc791bcf296">
+					<printWhenExpression><![CDATA[$P{SESTESSO}!=null && !$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="92" y="282" width="465" height="16" uuid="0aa86dca-1453-4bf6-8da2-ccf7d7516f8b">
+					<printWhenExpression><![CDATA[$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ASL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="282" width="78" height="16" uuid="e87ef893-8d1b-45e7-b778-15e72a4f4ece">
+					<printWhenExpression><![CDATA[$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[asl di appartenenza]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="92" y="644" width="465" height="16" uuid="dd4318fe-d7a5-473f-8510-6a01fb458f4c">
+					<printWhenExpression><![CDATA[!$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ASL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="644" width="78" height="16" uuid="84c07d82-7d7a-4d4b-8267-d573698299c9">
+					<printWhenExpression><![CDATA[!$P{SESTESSO}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[asl di appartenenza]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="61" y="495" width="10" height="10" uuid="f06323c7-f133-44b1-8137-930e52fe2dae"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="61" y="495" width="10" height="10" uuid="530bc720-46cd-4de1-872d-b23c791538e7">
+					<printWhenExpression><![CDATA[$P{SESTESSO} && $P{NESSUN_TITOLO_STUDIO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="493" width="284" height="16" uuid="0039b326-83f0-45be-82f3-c0ae97d5e4ca"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[nessun titolo di studio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="773" width="10" height="10" uuid="5cf076f1-c386-4488-a642-4dcc31a9fadb">
+					<printWhenExpression><![CDATA[!$P{SESTESSO} && $P{NESSUN_TITOLO_STUDIO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="771" width="284" height="16" uuid="902be094-43bb-435d-9979-c597df433bb4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[nessun titolo di studio]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="32" y="522" width="10" height="10" uuid="76c53435-0656-4e06-9134-6e2bacb1f249"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="51" y="520" width="284" height="16" uuid="23124c4a-0305-4f1f-8889-90dce9c7c97b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[lavorativamente occupato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="522" width="10" height="10" uuid="0df6a49d-8aa1-44be-be99-08f8d51fdca0">
+					<printWhenExpression><![CDATA[$P{SESTESSO} && $P{LAVORO_DESTINATARIO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="798" width="10" height="10" uuid="5f6f1368-4914-41c3-9192-2e276a896049">
+					<printWhenExpression><![CDATA[!$P{SESTESSO} && $P{LAVORO_DESTINATARIO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="796" width="284" height="16" uuid="02345277-8daf-401f-8a85-34fcdad97de2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[lavorativamente occupato]]></text>
+			</staticText>
+		</band>
+		<band height="822">
+			<rectangle>
+				<reportElement x="24" y="142" width="10" height="10" uuid="b4d94f67-d069-4043-9e8c-418ac42e1303"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="24" y="197" width="10" height="10" uuid="c3d32880-4efc-432d-aa62-f30866b516d0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="24" y="247" width="10" height="10" uuid="77c0f94c-2dbf-4c0a-9458-967c98e73926"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="24" y="341" width="10" height="10" uuid="3fca6aa7-9268-48f5-ba22-8fd676c9ab58"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="24" y="594" width="10" height="10" uuid="ff63bd78-668c-47a4-b322-80679923b968"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="82" y="438" width="410" height="33" uuid="1c3c03d0-9888-43b0-a580-9390009a66bd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DICHIARA che, alla data della presentazione della domanda, il soggetto destinatario della misura risulta essere:
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="510" width="271" height="18" uuid="3bd13217-0637-44c8-93ed-6b79af73a91f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[residente in Regione Piemonte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="103" width="468" height="28" uuid="95efddc7-1e2d-4455-ba03-7c003f9db252"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Per nucleo famigliare convivente ai fini anagrafici si intende un insieme di persone legate da vincoli di matrimonio, parentela, affinità, adozione, tutela o da vincoli affettivi in regime di coabitazione e con dimora abituale nello stesso Comune (articolo 4 del Decreto del Presidente della Repubblica 30/05/1989, n. 223)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="247" width="10" height="10" uuid="6867e532-d1d1-495f-b20c-6e4047ad4e77">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_TUTELA}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="197" width="10" height="10" uuid="fceecb67-8909-4f6d-a6a7-8c76df75896f">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_PARENTE}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="618" width="41" height="18" uuid="24ea3425-b34a-4120-a01d-a52efc28b5cd"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[C)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="8" width="278" height="16" uuid="467cfac9-ce0b-4349-bca4-72ec14ba7fbd"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Relazione sussistente tra RICHIEDENTE E DESTINATARIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="81" width="348" height="16" uuid="8f38441f-56e3-4c0d-9730-b74e9ee20924"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[componenti nucleo famigliare convivente ai fini anagrafici;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="58" width="455" height="16" uuid="05d2b4fc-2981-4f95-837c-944218ac4a38"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Genitore o altro soggetto cui è stata attribuito, con provvedimento giudiziale, l’esercizio della potestà genitoriale nei confronti di un minore.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="592" width="348" height="16" uuid="20dbac46-cafd-4478-a3d9-f31225b4eb29"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Persona con disabilità, non autosufficiente ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="564" width="10" height="10" uuid="442414cb-e7ce-4028-8156-3c6ad5486f32"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="314" width="464" height="15" uuid="7c1f0d0d-9adb-4fb7-9a62-988d6d88e3a5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[curatela dell’inabilitato disposta con provvedimento giudiziale (art. 424 cod. civ.);]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="341" width="10" height="10" uuid="86a6d46d-2b4e-40f9-81ca-3656af1d2b58">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_SOSTEGNO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="36" width="348" height="16" uuid="c45c9009-f892-4b17-b785-418523f728be"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[esercizio di potestà genitoriale (in caso di minori);]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="564" width="348" height="16" uuid="38621def-c17d-4d96-8f9c-4beb3ff78fdb"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Di età pari o superiore a 65 anni, non autosufficiente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="266" width="468" height="17" uuid="22d45b97-3f27-488b-871f-6eb29b6cdd13"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[tutela disposta con provvedimento giudiziale in caso di interdizione ex art. 414 cod. civ.;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="194" width="348" height="16" uuid="9bf3e80b-1e41-475f-825a-ad050d933314"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[parenti in linea diretta di 1° grado (genitori-figli) non conviventi;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="292" width="348" height="16" uuid="73e4d9d1-2008-4b84-86a4-6107776c766b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[ curatela;]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="39" width="10" height="10" uuid="8230455e-a18c-4490-818b-f06b5ab1525d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="24" y="84" width="10" height="10" uuid="f84ce2f8-1777-4e2b-959c-fdc377f4bb6c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="43" y="244" width="348" height="16" uuid="beaa091d-d35e-4de8-915b-13092577e865"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[tutela;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="360" width="464" height="23" uuid="bd61c48e-b2e7-49a7-8533-f4e1061d75da"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Nominato dal Giudice tutelare per tutelare soggetti che si trovino nell’impossibilità, anche parziale o temporanea, di provvedere ai propri interessi (L. n. 6/2004).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="483" width="41" height="18" uuid="1b954292-30c9-4ad8-9dd6-222c2f287ec6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="216" width="455" height="22" uuid="7a6215dc-601f-4bb8-a8d8-14b64e211360"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Il rapporto di parentela in linea retta di primo grado è esclusivamente quello tra genitori e i figli (rapporto bidirezionale): la fattispecie va selezionata nel caso di assenza di convivenza anagrafica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="142" width="10" height="10" uuid="c6f6a5f9-822d-4839-bb18-3be12e56b2dc">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_CONIUGE}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="338" width="348" height="16" uuid="388b4345-54b2-4c41-b779-75dc5091bee9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[amministratore di sostegno;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="39" width="10" height="10" uuid="ea72e4f6-709b-425e-8b37-1075c1a3617b">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_POTESTA}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="640" width="503" height="43" uuid="8c0c5c1f-9945-455f-bfeb-b72e23efd3f5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[già stato sottoposto a “valutazione multidimensionale” presso le Unità di Valutazione competenti (U.V.G. – ANZIANI, o U.M.V.D. – DISABILI) – con conseguente predisposizione di un P.A.I., quale trasposizione operativa del Progetto individuale definito in sede di valutazione;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="139" width="348" height="16" uuid="3eaca3ff-0a24-4f93-808d-bfdd11235d8e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[coniugi o parti dell’unione civile non conviventi;]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="295" width="10" height="10" uuid="f7ebb448-a0d0-4697-b4ab-9b5fbed56200"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="161" width="464" height="25" uuid="05b80267-5f3f-4c71-90c3-a4fa48bfdca8"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Tale fattispecie è da selezionare nel caso in cui vi siano coniugi o parti di un’unione civile (stipulata ai sensi della Legge 20 maggio 2016, n. 76) che, pur facenti parte dello stesso nucleo familiare, abbiano diversa residenza anagrafica.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="295" width="10" height="10" uuid="9165288f-e474-489a-a736-4a6deeca8c21">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_CURATELA}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="594" width="10" height="10" uuid="dd444174-4936-4036-8d30-7fe2f9761af7">
+					<printWhenExpression><![CDATA[!$P{ULTRA65} && $P{ULTRA65}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="534" width="41" height="18" uuid="d3ef9d8c-95e0-49c1-a204-86c2f3ff546f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[B)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="564" width="10" height="10" uuid="afbf754b-c550-4d5e-b173-e41e94ab87fe">
+					<printWhenExpression><![CDATA[$P{ULTRA65}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="84" width="10" height="10" uuid="b13d0056-24b1-4595-a763-a70783c0ae63">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_NUCLEO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="393" width="348" height="16" uuid="93a0c618-45d6-4c17-bdea-a0cf7498bbac"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[altro]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="25" y="397" width="10" height="10" uuid="8dbd1e8e-5c27-4571-903f-d165969484c0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="25" y="397" width="10" height="10" uuid="0d0f0e42-3971-4497-ab2a-e297c66f2fa1">
+					<printWhenExpression><![CDATA[$P{RAPPORTO_ALTRO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="691" width="41" height="18" uuid="d5639b4e-8c90-470b-8fd7-327cddfa1757"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[C2)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="24" y="715" width="500" height="30" uuid="a9375e2c-0c33-45eb-b0ec-e6a941671079"/>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Times New Roman" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["in possesso di un punteggio di valutazione del “bisogno sociale” (rilasciato da Unità di Valutazione) pari a     " + $P{PUNTEGGIO} + "    (comunque non inferiore a 7)  ;"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="753" width="41" height="18" uuid="db88f406-1b64-418b-ba85-34bb762333d2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[D)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="776" width="503" height="30" uuid="b838b8b8-ce82-4cd1-90c4-faad1bf64cb4"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[in possesso di una certificazione “I.S.E.E. sociosanitario”  con valore conforme alle regole definite nel bando (inferiore a € 50.000,00, oppure a € 65.000,00 nel caso in cui il beneficiario sia minore);]]></text>
+			</staticText>
+		</band>
+		<band height="110">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="24" y="31" width="10" height="10" uuid="278425ec-fc4f-4595-a06f-58461ca6d8d1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="43" y="28" width="503" height="23" uuid="986b8a27-f134-42f4-84e7-e164bddab79a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[non beneficiario di altre misure aventi natura di trasferimento monetario specificatamente destinato al sostegno della residenzialità.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="60" width="10" height="10" uuid="8f42904a-a0b8-4291-bc3c-fa7da5a4109c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="31" width="10" height="10" uuid="7ed2001f-2c21-4d86-88ff-3830d017b5d3">
+					<printWhenExpression><![CDATA[$P{NESSUNA_INCOMPATIBILITA}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="6" width="41" height="18" uuid="68fc3706-b7c9-47f3-846a-24d3bb3390b6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[E)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="60" width="10" height="10" uuid="9194dbf9-45c5-4d7f-b606-90562907ee66">
+					<printWhenExpression><![CDATA[!$P{NESSUNA_INCOMPATIBILITA} && $P{NESSUNA_INCOMPATIBILITA}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="55" width="503" height="23" uuid="0209082d-ac78-4297-afcf-678d959def35"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[è beneficiario di altre misure aventi natura di trasferimento monetario specificatamente destinato/a al sostegno della residenzialità, ed è disponibile a rinunciarvi in caso di assegnazione del buono.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="86" width="458" height="20" uuid="5dc64798-23ae-4173-8c95-0f0a37966d49"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DICHIARA ALTRESI’ CHE, IN FAVORE DEL DESTINATARIO DELLA MISURA]]></text>
+			</staticText>
+		</band>
+		<band height="120">
+			<printWhenExpression><![CDATA[$P{CONTRATTO_TIPO_RSA}]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="24" y="12" width="10" height="10" uuid="b16f414a-4270-44f3-ad82-1bfb484df1e2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="12" width="10" height="10" uuid="821aeac4-1b41-4b17-970a-c800a43f593f">
+					<printWhenExpression><![CDATA[$P{CONTRATTO_TIPO_RSA}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="89" width="490" height="31" uuid="a4bbbf61-091d-44d9-a2e8-6d185f8828c4"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[- essere in corso di validità alla data di presentazione dell’istanza;
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="9" width="490" height="16" uuid="80649d58-f8c4-452e-b3d6-1ad31307b2d8"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[sussiste un regolare contratto di inserimento in struttura, con le seguenti caratteristiche:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="29" width="78" height="16" uuid="f9520683-8dd3-4683-b7d4-e38ac158ad9f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[denominazione]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="126" y="29" width="390" height="16" uuid="5f11897e-2667-44e1-8591-2be554e47e68"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RSA_DENOMINAZIONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="126" y="46" width="390" height="16" uuid="28c3e6ea-f1e3-4057-9eb8-6c435fc311e8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RSA_COMUNE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="44" y="47" width="78" height="16" uuid="19b193a3-b509-49cc-bacf-99ab882d9468"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[comune]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="65" width="78" height="16" uuid="d0572511-50da-4e19-8d33-43c3b349d35b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[indirizzo]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="126" y="64" width="390" height="16" uuid="12e6b5e1-b1eb-4898-988a-28f102854c7e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RSA_INDIRIZZO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="42">
+			<printWhenExpression><![CDATA[$P{CONTRATTO_TIPO_NESSUNO}]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="17" y="12" width="10" height="10" uuid="6e51e2a3-4b7a-4c6d-b7a0-979546a7f6d4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="35" y="6" width="485" height="30" uuid="7190a18f-bd92-4bed-b05e-0dcc03b98d40"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[non sussiste un regolare contratto di inserimento in struttura, avente le caratteristiche indicate ai punti precedenti , ma si impegna entro 30 giorni a produrne copia.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="12" width="10" height="10" uuid="0d6df622-f1ac-454c-87a2-a69b67647bee">
+					<printWhenExpression><![CDATA[$P{CONTRATTO_TIPO_NESSUNO}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+		</band>
+		<band height="445">
+			<ellipse>
+				<reportElement x="24" y="142" width="4" height="4" backcolor="#000000" uuid="7805981b-2eca-4f37-a30f-3911e6a0a93c"/>
+			</ellipse>
+			<textField>
+				<reportElement x="42" y="140" width="471" height="26" uuid="d693badc-556b-4b6b-91fb-a79a0781da68"/>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Times New Roman" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["tutte le altre condizioni e modalità di concessione ed erogazione del “Buono” sono descritte nell’Avviso pubblico approvato con D.G.R. n. " + $P{DGR} + "."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="174" width="471" height="25" uuid="865aec5e-d9af-45c2-a456-4084500e1803"/>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Times New Roman" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["le modalità di trattamento dei dati personali ai sensi dell’art. 13 del regolamento (UE) 2016/679 sono contenute nell’informativa allegata all’Avviso Pubblico (D.G.R. " +  $P{DGR} + " ) di cui si è presa visione."]]></textFieldExpression>
+			</textField>
+			<ellipse>
+				<reportElement x="24" y="176" width="4" height="4" backcolor="#000000" uuid="57d65160-3b67-41cb-8f01-61b17d0e1def"/>
+			</ellipse>
+			<line>
+				<reportElement x="24" y="208" width="492" height="1" uuid="070a41e9-a9c2-48fa-bbbd-b83d0930cf5e"/>
+			</line>
+			<staticText>
+				<reportElement x="24" y="341" width="411" height="19" uuid="02798b60-5754-4a78-a96e-11d70227d94f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ALLEGATI :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="219" width="318" height="15" uuid="d574d325-87e4-42b9-ae4e-acbf9c7fcee9"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="5"/>
+				</textElement>
+				<text><![CDATA[1.Tale dato può essere reperito presso la segreteria dell’Unità di Valutazione oppure presso l’Ente gestore dei servizi socio-assistenziali.
+2.I.S.E.E. per prestazioni agevolate di natura socio-sanitaria, ai sensi del DPCM 5 dicembre 2013, n. 159.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="84" width="487" height="46" uuid="f1864393-fc42-43f9-9afd-6e0bcf5acebd"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[1) essere beneficiario (anche con decorrenza successiva all’ammissione) di altri contributi aventi natura di trasferimento monetario a sostegno della Residenzialità. Qualora si divenisse beneficiari di altro contributo di tale natura, occorrerà tempestivamente comunicarlo in quanto comporterà la decadenza del “Buono Residenzialità”.]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement x="24" y="69" width="4" height="4" backcolor="#000000" uuid="ffc14436-fc87-478a-b378-a0d6289eb338"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="120" y="42" width="334" height="19" uuid="42a75122-8438-4c84-a0cf-40aafa027a4b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DICHIARA, infine, DI PRENDERE ATTO CHE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="67" width="273" height="13" uuid="53eeedba-34fd-43ae-873a-f9a05a37aeba"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[L’erogazione del “Buono” risulta incompatibile con:
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="24" y="366" width="539" height="79" uuid="78e82aed-cb2e-4ad3-b3eb-abdad09843c8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ELENCO_ALLEGATI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="21" width="84" height="14" uuid="609df2e8-d626-4703-a6c7-4d345767780f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[data inizio contratto]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="110" y="21" width="129" height="16" uuid="1ef0ff3c-792a-430e-adab-20e1e857041e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATA_INI_CONTRATTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="3" width="166" height="14" uuid="52f1ff7d-ee9c-495f-bfeb-760a16fda038"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data inizio del contratto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="265" width="535" height="65" uuid="cc42d731-9a67-4dc3-a85f-94e76e943aab"/>
+				<text><![CDATA[In caso di assegnazione del “Buono” l’erogazione potrà avvenire mensilmente al destinatario attraverso l’applicazione della riduzione della quota sociale della retta pari all’importo del Buono. Tale riduzione è applicata dalla struttura residenziale a partire dalla retta del primo mese successivo a quello in cui il Buono è stato assegnato o confermato in caso di assegnazione condizionata.
+
+]]></text>
+			</staticText>
+		</band>
+		<band height="202">
+			<printWhenExpression><![CDATA[$P{CONTRODEDUZIONE}]]></printWhenExpression>
+			<staticText>
+				<reportElement x="24" y="10" width="411" height="19" uuid="0ecf492a-a7ff-4117-9e04-13d554a75815">
+					<printWhenExpression><![CDATA[$P{ELENCO_ALLEGATI_CONTRODEDUZIONE}!=""]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ALLEGATI CONTRODEDUZIONE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="24" y="35" width="539" height="29" uuid="a5f2067e-a9d6-4c5c-a81e-5697abdba9c6">
+					<printWhenExpression><![CDATA[$P{ELENCO_ALLEGATI_CONTRODEDUZIONE}!=""]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ELENCO_ALLEGATI_CONTRODEDUZIONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="24" y="94" width="539" height="108" uuid="7d0fbd4a-e9ec-439c-92f0-47a60d825585"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOTA_CONTRODEDUZIONE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="69" width="411" height="19" uuid="e213637b-a006-4262-bfb0-50f2cff87262"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[CONTRODEDUZIONE :]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
