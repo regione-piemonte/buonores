@@ -1,0 +1,10 @@
+/build/
+/dist/
+/lib/
+/.classpath
+/.project
+/.swagger-codegen-ignore
+/.settings/org.eclipse.wst.common.component
+/bin/
+/.settings
+/.externalToolBuilders
