@@ -1,0 +1,9 @@
+/bin/
+/build/
+/dist/
+/lib/
+/lanciaAnt.bat
+/.classpath
+/.project
+/.swagger-codegen-ignore
+/.settings
