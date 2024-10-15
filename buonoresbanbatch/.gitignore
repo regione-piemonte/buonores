@@ -1,0 +1,8 @@
+/bin/
+/lib/
+.classpath
+.settings
+.project
+lanciaAnt.bat
+/build/*
+/dist/*
