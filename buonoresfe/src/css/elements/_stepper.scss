@@ -1,0 +1,141 @@
+.q-stepper {
+  .q-stepper__header {
+
+    margin-bottom: 50px;
+
+    &.q-stepper__header--border {
+      border: none;
+    }
+    .q-stepper__tab {
+
+      &:first-child {
+        .q-stepper__label {
+          text-align: left;
+        }
+      }
+
+      &:last-child {
+        .q-stepper__label {
+          text-align: right;
+        }
+      }
+
+      .q-stepper__label {
+        display: block;
+        max-width: 80px;
+
+
+
+        @media (min-width: $breakpoint-sm-min) {
+          max-width: 120px;
+        }
+
+        @media (min-width: $breakpoint-xl-min) {
+          max-width: 180px;
+          text-align: center!important;
+        }
+
+        color: $blue-700;
+      }
+
+      
+    }
+
+    .q-stepper__tab--active {
+      .q-stepper__label {
+        font-weight: bold;
+
+      }
+
+      // override regole per lo step attivo
+      .q-stepper__dot {
+        background-color: $blue-700;
+
+        span {
+          color: $white;
+        }
+      }
+    }
+
+    .q-stepper__title {
+      @include font-size(12px);
+
+      @media (max-width: $breakpoint-xxs) {
+        @include sr-only;
+      }
+
+      @media (min-width: $breakpoint-md-min) {
+        @include font-size(14px);
+      }
+    }
+
+
+    .q-stepper__dot {
+      width: 38px;
+      height: 38px;
+      border: 3px solid $blue-700;
+      background-color: transparent;
+
+      &::after,
+      &::before {
+        background: $blue-700 !important;
+      }
+
+      span {
+        color: $blue-700;
+        font-weight: bold;
+        font-size: 16px;
+
+        @media (min-width: $breakpoint-lg-min) {
+          font-size: 20px;
+        }
+      }
+
+    }
+  }
+
+  .q-toggle {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .height-scroll-area {
+    height: 300px!important;
+  }
+
+  .button-action-stepper {
+    .q-btn {
+      &:not(:first-child) {
+        //margin-top: 25px;
+        @media (min-width: $breakpoint-sm-min) {
+          margin-top: 0px;
+          margin-left: 25px;
+          text-align: right;
+        }
+      }
+    }
+    .first-block {
+      .q-btn {
+        margin-bottom: 25px;
+        @media (min-width: $breakpoint-lg-min) {
+          margin-bottom: 0px;
+        }
+      }
+    }
+    .second-block {
+      .row {
+        @media (max-width: 767px) {
+          flex-direction: column;
+        }
+
+        @media (min-width: 767px) {
+          .col-auto:first-child {
+            margin-right: 25px;
+          }
+
+        }
+      }
+
+    }
+  }
+}

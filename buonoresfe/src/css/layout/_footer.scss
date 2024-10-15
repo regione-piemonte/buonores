@@ -1,0 +1,28 @@
+.lms-layout-footer {
+  @include list(inline);
+  background-color: $blue-900;
+}
+
+.lms-layout-footer__logo {
+  &:not(:last-child) {
+    img {
+      @media all and (min-width: $lms-breakpoint-lg) {
+        padding-right: 45px;
+        border-right: 0.35px solid $white;
+      }
+    }
+
+  }
+}
+
+.lms-layout-footer__logo-piemonteTu {
+  width: 261px;
+  height: auto;
+}
+.lms-layout-footer__policy-links {
+  .text-copyright  {
+    @media all and (min-width: $lms-breakpoint-md) {
+      text-align: right;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.lms-banner {
+  border-left-width: 8px;
+  border-left-style: solid;
+  border-left-color: transparent;
+
+  &.lms-banner--info {
+    background-color: $blue-300;
+    border-left-color: $blue;
+  }
+
+  &.lms-banner--warning {
+    background-color: $yellow-400;
+    border-left-color: $yellow;
+  }
+
+  &.lms-banner--positive {
+    background-color: $green-400;
+    border-left-color: $green;
+  }
+
+  &.lms-banner--negative {
+    background-color: $red-400;
+    border-left-color: $red;
+  }
+
+  .classesIcon {
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+  }
+
+  h2 {
+    margin-top: 0px;  
+  }
+}
+
+
+.q-notification {
+  border-left: 5px solid;
+  min-height: 50px;
+  font-size: 18px!important;
+  font-weight: bold;
+  color: $black!important;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  &.bg-positive {
+    background-color: $green-400!important;
+    border-left-color: $green!important;
+  }
+  &.bg-negative {
+    background-color: $red-400!important;
+    border-left-color: $red!important;
+  }
+}

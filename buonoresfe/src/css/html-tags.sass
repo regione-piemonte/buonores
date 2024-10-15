@@ -1,0 +1,48 @@
+html, body
+  background-color: $lms-background-color
+
+blockquote
+  border-left: 8px solid $primary
+  font-size: map-get($body1, "size")
+  font-weight: map-get($body1, "weight")
+  line-height: map-get($body1, "line-height")
+  letter-spacing: map-get($body1, "letter-spacing")
+  font-style: italic
+
+ul, ol
+  list-style: none
+  padding-left: 24px
+  margin: 0
+
+  li
+    margin: 8px 0
+    position: relative
+
+
+  li::before
+    color: $primary
+    display: inline-block
+
+ul
+  li::before
+    content: "\2022" // \2022 is the CSS Code/unicode for a bullet
+    position: absolute
+    transform: translateX(-200%)
+    font-weight: bold
+
+ol
+  counter-reset: ordered-list-item
+
+  li::before
+    counter-increment: ordered-list-item // Increment the counter "ordered-list-item" by 1
+    content: counter(ordered-list-item) "."
+    font-weight: normal
+    position: absolute
+    transform: translateX(-150%)
+
+code, kbd
+  background-color: $grey-9
+  color: $blue-2
+  border-radius: 6px
+  padding: 1px 8px
+  font-weight: bold

@@ -1,0 +1,52 @@
+dl {
+  margin: 0px;
+  dt {
+    font-weight: bold;
+  }
+  dd {
+    margin: 0px;
+  }
+
+  &.info-grid {
+    
+
+    dt {
+      float: left;
+      margin-right: 5px;
+    }
+
+    dd {
+
+      &::after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+    }
+
+  }
+}
+
+ol {
+  &:not(.lower-roman) {
+    padding-left: 18px;
+  }
+  li {
+    &::before {
+      font-weight: bold;
+    }
+  }
+  &.lower-roman {
+    list-style: lower-latin;
+    li {
+      &::before {
+        display: none;
+      }
+      &::marker {
+        font-weight: bold;
+        color: $primary;
+      }
+    }
+  }
+
+}

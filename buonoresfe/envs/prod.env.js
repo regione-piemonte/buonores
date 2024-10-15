@@ -1,0 +1,6 @@
+module.exports = {
+  APP_API_BASE_URL_SCELSOC: "xxxxx",
+  APP_API_BASE_URL_BUONORES: "/",
+  APP_CODE: "BUONORES",
+  APP_API_MOCKS_JS_ENABLED: false
+};

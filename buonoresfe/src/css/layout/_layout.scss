@@ -1,0 +1,186 @@
+// accessibilità
+
+#app-scelsoc {
+  .keyFocus {
+    box-shadow: 0px 0px 0px 4px $orange !important;
+    -webkit-box-shadow: 0px 0px 0px 4px $orange !important;
+    -moz-box-shadow: 0px 0px 0px 4px $orange !important;
+  }
+
+  .height-scroll-area {
+    height: 300px!important;
+  }
+
+  .border-left--primary {
+    border-left: 5px solid $primary;
+    width: 100%;
+  }
+
+}
+
+.skip-link {
+  background: $white;
+  //border: 2px solid $primary;
+  color: $black !important;
+  padding: 15px;
+  font-weight: 700;
+  left: calc(50% - 125px);
+  width: 250px;
+  padding: 10px;
+  text-align: center;
+  position: absolute;
+  z-index: 100000;
+  transform: translateY(-110%);
+  transition: transform 0.3s;
+  @include font-size(16px);
+}
+
+.skip-link {
+  &:focus {
+    transform: translateY(0%);
+    top: 10px;
+  }
+}
+
+// fine accessibilità
+
+
+.home-page-home, .lms-page {
+  @include minHeightPage;
+}
+.home-page-home {
+  background-color: $white;
+}
+.page-main {
+  padding-top: 170px!important;
+  padding-bottom: 50px;
+  @include minHeightPage;
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.q-page-container {
+  @extend .container;
+}
+
+.home-bg-img {
+  @media (min-width: $breakpoint-md-min) {
+    background: url(../../public/img/scelta-sociale/scelta-sociale-home.png) right 0px top -20px/300px no-repeat;
+  }
+
+  @media (min-width: $breakpoint-lg-min) {
+    background: url(../../public/img/scelta-sociale/scelta-sociale-home.png) left 0px bottom 0px / 300px no-repeat;
+  }
+
+  @media (min-width: $breakpoint-xl-min) {
+    background: url(../../public/img/scelta-sociale/scelta-sociale-home.png) left 0px bottom 0px / 300px no-repeat;
+  }
+}
+
+.logo-portale {
+  height: 48px;
+  width: auto;
+}
+
+
+.richiesta-stato {
+  text-transform: uppercase;
+  &--bozza, &--in_rettifica, &--ammessa_riserva, &--perfezionata, &--presa_in_carico, &--in_pagamento, &--preavviso_di_diniego_in_pagamento {
+    @include colorState(blueColor);
+  }
+  &--inviata, &--ammessa, &--rettificata {
+    @include colorState(greenColor);
+  }
+  &--da_rettificare {
+    @include colorState(orangeColor);
+  }
+  &--non_ammessa, &--revocata, &--annullata, &--diniego, &--preavviso_diniego, &--rinunciata {
+    @include colorState(redColor);
+  }
+  
+  
+}
+
+.date-start-end {
+  .q-field--with-bottom {
+    padding-bottom: 0px;
+  }
+}
+
+.border-left {
+  &--primary {
+    @extend %border-left-status;
+    border-left-color: $primary;
+  }
+  &--error {
+    @extend %border-left-status;
+    border-left-color: $red;
+  }
+  &--success {
+    @extend %border-left-status;
+    border-left-color: $green-600;
+  }
+  &--warning {
+    @extend %border-left-status;
+    border-left-color: $yellow;
+  }
+}
+// regola css dt dd tasto modifica attivo
+.text-overlay--active{
+  dt, dd{
+    color:$grey-900;
+  }
+}
+
+.text-disabled-grey{
+  &::after {
+    background: hsla(0,0%,98%,.6);
+    content: " ";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .flex-column-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-disable-service {
+    z-index: 10;
+    margin-bottom: 0px;
+  } 
+}
+
+.row--timelapse {
+  align-items: center;
+  // background-image: url('../../public/img/arrow.png');
+  // background-size: cover;
+  // background-position-y: center;
+  // background-position-x: right;
+  // background-repeat: no-repeat;
+  min-height: 90px;
+  @media (min-width: $breakpoint-lg-min) {
+    justify-content: center;
+  }
+}
+.row--timelapse-second {
+  margin-top: -5px;
+  margin-bottom: 50px;
+  .col-timelapse {
+    &--first {
+      color: $primary-color;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    &--last {
+      color: $primary-color;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-align: right;
+    }
+  }
+}

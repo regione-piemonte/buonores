@@ -1,0 +1,61 @@
+// app global css in Sass form
+
+// Utile solo per far caricare le variabili
+#____useless
+  color: $primary
+
+// ALTRO
+// ---------------------------------------------------------------------------------------------------------------------
+@import "fonts"
+@import "./sizes"
+@import "./helpers"
+@import "./html-tags"
+@import "./quasar-overrides"
+
+
+//@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap')
+
+.text-wrap-word
+  overflow-wrap: break-word
+
+.h-text-font-nunito
+  font-family: Nunito, sans-serif
+
+.h-banner
+  border-left-width: 8px
+  border-left-style: solid
+  border-left-color: transparent
+
+.h-banner--info
+  background-color: $blue-1
+  border-left-color: $blue-4
+
+.h-banner--warning
+  background-color: $orange-2
+  border-left-color: $orange-5
+
+.required-field
+  color: $red
+
+
+
+// scss scelta sociale
+
+@import "base/grid"
+@import "base/variables"
+@import "base/mixin"
+@import "base/typography"
+
+
+@import "elements/accordion"
+@import "elements/alert"
+@import "elements/button"
+@import "elements/card"
+@import "elements/input"
+@import "elements/list"
+@import "elements/spinner"
+@import "elements/stepper"
+
+@import "layout/header"
+@import "layout/footer"
+@import "layout/layout"

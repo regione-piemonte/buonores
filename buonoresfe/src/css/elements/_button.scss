@@ -1,0 +1,53 @@
+/*
+colori disponibili per i button
+positive: $green
+negative: $red
+primary: $blue
+--
+versioni possibili
+outline
+flat
+*/
+
+.q-btn {
+  &:not(.q-btn--flat):not(.q-btn--round) {
+    min-width: 200px;
+    width: auto;
+  }
+  // &:not(:first-child) {
+  //   margin-left: 15px;
+  // }
+
+
+
+
+  &.bg-primary {
+    background-color: $blue!important;
+  }
+  &.bg-negative {
+    background-color: $red!important;
+  }
+  &.bg-positive {
+    background-color: $green!important;
+  }
+}
+
+.btn--flat {
+  color: $primary;
+  font-weight: bold;
+  text-decoration: none;
+  @include rfs(16px);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.q-item__section--main~.q-item__section--side {
+  color: $primary;
+}
+
+.q-card {
+  .q-btn.q-btn--standard {
+    min-width: auto;
+  }
+}
